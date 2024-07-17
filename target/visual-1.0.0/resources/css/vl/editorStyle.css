@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+/*********************************************
+* iframe css
+*********************************************/
+body { font-family: 'Malgun Gothic','맑은 고딕', dotum,'돋움',sans-serif; padding: 10px; text-align: center; background: transparent; } 
+body::-webkit-scrollbar { width: 9px; height: 5px; }   
+body::-webkit-scrollbar-track  { background: transparent; }
+body::-webkit-scrollbar-thumb  { width: 6px; height: 5px; background: rgba(0,0,0,.2); -webkit-border-radius: 10px; border-radius: 10px; } 
+body   { scrollbar-width: thin; scrollbar-color: rgba(0,0,0,.2) transparent; }    /*    파이어폭스    */
+
+.k-placeholder  { color: #bebebe; text-align: left; }   

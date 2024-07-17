@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bcs.vl.sysm.service.mapper.SYSM200Mapper">
+	
+	<!-- 테넌트 목록 조회 -->
+	<select id="SYSM200SEL01" parameterType="SYSM200VO" resultType="SYSM200VO">
+			/* SYSM200_SQL.SYSM200SEL01 */
+			SELECT
+				  TI.SystemIdx
+				, (SELECT systemName FROM SystemInfo SI WHERE SI.SystemIdx = TI.SystemIdx) AS systemName
+				, (SELECT tenant_group_id FROM VL_TENANT_GROUP_ATHT VTGA WHERE VTGA.TenantPrefix = TI.TenantPrefix) AS tenantGroupId
+				, TI.TenantPrefix
+				, TI.TenantName
+				, CONCAT(TI.TenantPrefix, ' (', TI.TenantName, ')') AS prefixAndName
+				, TI.IsEnabled
+				, TI.Description
+			FROM  TenantInfo TI
+			WHERE 1=1
+
+			<if test='systemIdx != null and systemIdx !=""'>
+				AND TI.SystemIdx = #{systemIdx}
+			</if>
+
+			<if test='tenantPrefix != null and tenantPrefix !=""'>
+				AND TI.TenantPrefix LIKE CONCAT('%', #{tenantPrefix}, '%')
+			</if>
+			<if test='tenantName != null and tenantName !=""'>
+				AND TI.TenantName LIKE CONCAT('%', #{tenantName}, '%')
+			</if>
+			<if test='keyword != null and keyword !=""'>
+				AND (
+					   TI.TenantPrefix LIKE CONCAT('%', #{keyword}, '%')
+					OR TI.TenantName   LIKE CONCAT('%', #{keyword}, '%')
+				)
+			</if>
+			<if test='isEnabled != null and isEnabled !=""'>
+				AND TI.IsEnabled = #{isEnabled}
+			</if>
+			<if test="sort != null and sort.size() > 0">
+			    ORDER BY
+			    <foreach item="item" collection="sort" separator=",">
+					${item.column} ${item.direction}
+			    </foreach>
+			</if>
+	</select>
+	
+	<!-- 테넌트 중복검사 -->
+	<select id="SYSM200SEL02" parameterType="SYSM210VO" resultType="int">
+		SELECT
+			  COUNT(*) AS count
+		FROM TenantInfo
+		WHERE 1=1
+		AND SystemIdx = #{systemIdx}
+		AND TenantPrefix = #{tenantPrefix}
+		AND IsEnabled = 1
+	</select>
+	
+	<!-- 테넌트그룹 별 리스트 -->
+	<select id="SYSM200SEL03" parameterType="SYSM200VO" resultType="SYSM200VO">
+			SELECT
+				  VTGA.tenant_group_id									AS tenantGroupId
+				, TI.TenantPrefix										AS tenantPrefix
+				, CONCAT(TI.TenantName, ' 【', TI.SystemIdx, '】')	AS fmnm
+				, TI.SystemIdx AS systemIdx
+			FROM TenantInfo TI
+			LEFT JOIN VL_TENANT_GROUP_ATHT VTGA ON (TI.TenantPrefix = VTGA.TenantPrefix AND TI.IsEnabled = 1)
+	  		LEFT JOIN VL_TENANT_GROUP VTG ON (VTG.tenant_group_id = VTGA.tenant_group_id AND tenant_group_state = '100')	   		
+			WHERE 1=1
+			<if test='usrGrd != "00" and !@bcs.vl.util.com.ComnFun@isEmpty(tenantPrefix)'>
+				AND VTG.tenant_group_state IS NOT null
+				AND VTGA.tenant_group_id = (SELECT tenant_group_id FROM VL_TENANT_GROUP_ATHT WHERE TenantPrefix = #{tenantPrefix})
+			</if>
+			ORDER BY VTGA.tenant_group_id ASC, TI.TenantPrefix ASC
+	</select>
+	
+	<!-- 테넌트 등록 -->
+	<insert id="SYSM200INS01" parameterType="SYSM200VO">
+			INSERT INTO TenantInfo
+			(
+				SystemIdx
+				, TenantPrefix
+				, TenantName
+				, IsEnabled
+				, Description
+			)
+			VALUES (
+				#{systemIdx}
+				, #{tenantPrefix}
+				, #{tenantName}
+				, #{isEnabled}
+				, #{description}
+			)
+	</insert>
+
+	<insert id="SYSM200INS06" parameterType="MessageBodyVO">
+		/* SYSM200INS06.SYSM200_SQL */
+		INSERT INTO MessageBodyParameter
+		(SystemIdx , TenantPrefix, ServiceType, MessageType, ParamName, ParamValue)
+		SELECT #{systemIdx}    SystemIdx
+			 , #{tenantprefix} TenantPrefix
+			 , ServiceType, MessageType, ParamName, ParamValue
+		FROM MessageBodyParameter_init
+	</insert>
+
+
+	<!-- 테넌트 수정 -->
+	<update id="SYSM200UPT01" parameterType="SYSM200VO">
+			UPDATE TenantInfo
+			SET    TenantName			=  #{tenantName}
+			    ,  IsEnabled			=  #{isEnabled}
+				,  Description			=  #{description}
+			WHERE SystemIdx = #{systemIdx}
+			  AND TenantPrefix = #{tenantPrefix}
+	</update>
+	
+	<!-- 테넌트 그룹 매칭 등록 -->
+	<insert id="SYSM200INS02" parameterType="SYSM200VO">
+			INSERT INTO VL_TENANT_GROUP_ATHT
+			(
+				tenant_group_id
+				, TenantPrefix
+				, reg_dtm
+				, regr_id
+				, lst_corc_dtm
+				, lst_corpr_id
+			)
+			VALUES (
+				#{tenantGroupId}
+				, #{tenantPrefix}
+				, GETDATE()
+				, #{regrId}
+				, GETDATE()
+				, #{lstCorprId}
+			)
+	</insert>
+	
+	<!-- 테넌트 그룹 매칭 삭제 -->
+	<delete id="SYSM200DEL01" parameterType="SYSM200VO">
+        DELETE FROM VL_TENANT_GROUP_ATHT
+        WHERE TenantPrefix = #{tenantPrefix}
+    </delete>
+    
+    <!-- 서비스타입 등록 -->
+	<insert id="SYSM200INS03" parameterType="SYSM200VO">
+			INSERT INTO ServiceTypeInfo
+			(
+				SystemIdx
+				, TenantPrefix
+				, ServiceType
+				, ServiceTypeName
+			)
+			SELECT
+				  #{systemIdx}		AS SystemIdx
+				, #{tenantPrefix}	AS TenantPrefix
+				, CODE				AS ServiceType
+				, CODE_NAME			AS ServiceTypeName
+			FROM TB_CODE
+			WHERE CATEGORY = 'SERVICETYPE' AND USEYN = 1
+	</insert>
+
+	<!-- 서비스타입 등록 -->
+	<insert id="SYSM200INS04" parameterType="SYSM200VO">
+		INSERT INTO MessageBody
+		(
+			SystemIdx
+			, TenantPrefix
+			, ServiceType
+			, MessageType
+			, DelayTime
+			, InvokeOrder
+			, Description
+		)
+		VALUES(
+			#{systemIdx}
+			, #{tenantPrefix}
+			, 'I'
+			, 'IP1000Q'
+			, 0
+			, 1
+			, '수신'
+		);
+		
+		INSERT INTO MessageBody
+		(
+			SystemIdx
+			, TenantPrefix
+			, ServiceType
+			, MessageType
+			, DelayTime
+			, InvokeOrder
+			, Description
+		)
+		VALUES(
+			#{systemIdx}
+			, #{tenantPrefix}
+			, 'O'
+			, 'IP1000Q'
+			, 0
+			, 1
+			, '발신'
+		);
+	</insert>
+	
+	<!-- 서비스타입 등록 -->
+	<insert id="SYSM200INS05" parameterType="SYSM200VO">
+		INSERT INTO MessageHeader
+		(
+			SystemIdx
+			, TenantPrefix
+			, ServiceType
+			, HostName, Port
+			, ConnectTimeout
+			, AesKey
+			, AesKeySize
+			, AesCipherMode
+			, AesPaddingMode
+			, CustomerServiceID
+			, AuthKey
+			, SvcCode
+			, SendSmsToFail
+			, SendSmsQuery
+		)
+		VALUES(
+			#{systemIdx}
+			, #{tenantPrefix}
+			, 'I'
+			, '211.115.207.200'
+			, 60404
+			, 2000
+			, 'prod_BCNSca!_int'
+			, 128
+			, 'ECB'
+			, 'PKCS7'
+			, 'BRDCNS002'
+			, 'D75A9621A6909FBBB5D9977F76AABD939DC20F9E'
+			, '022038275006'
+			, 0
+			, NULL
+		);
+		
+		INSERT INTO MessageHeader
+		(
+			SystemIdx
+			, TenantPrefix
+			, ServiceType
+			, HostName, Port
+			, ConnectTimeout
+			, AesKey
+			, AesKeySize
+			, AesCipherMode
+			, AesPaddingMode
+			, CustomerServiceID
+			, AuthKey
+			, SvcCode
+			, SendSmsToFail
+			, SendSmsQuery
+		)
+		VALUES(
+			#{systemIdx}
+			, #{tenantPrefix}
+			, 'O'
+			, '211.115.207.200'
+			, 60404
+			, 2000
+			, 'prod_BCNSca!_int'
+			, 128
+			, 'ECB'
+			, 'PKCS7'
+			, 'BRDCNS002'
+			, 'D75A9621A6909FBBB5D9977F76AABD939DC20F9E'
+			, '022038275005'
+			, 0
+			, NULL
+		);
+	</insert>
+</mapper>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bcs.vl.sysm.service.mapper.SYSM400Mapper">
+
+  <resultMap id="result" type="bcs.vl.sysm.VO.SYSM400VO">
+        <result property="id" column="id"/>
+        <result property="tenantPrefix" column="TenantPrefix"/>
+        <result property="menuId" column="menu_id"/>
+        <result property="menuNm" column="menu_nm"/>
+        <result property="menuTypCd" column="menu_typ_cd"/>
+        <result property="prsMenuLvl" column="prs_menu_lvl"/>
+        <result property="hgrkMenuId" column="hgrk_menu_id"/>
+        <result property="srtSeqNo" column="srt_seq_no"/>
+        <result property="iconTypClss" column="icon_typ_clss"/>
+        <result property="menuState" column="menu_state"/>
+        <result property="regDtm" column="reg_dtm"/>
+        <result property="regrId" column="regr_id"/>
+        <result property="lstCorcDtm" column="lst_corc_dtm"/>
+        <result property="lstCorprId" column="lst_corpr_id"/>
+        <result property="dataFrmId" column="data_frm_id"/>
+        <result property="mapgVlu1" column="mapg_vlu1"/>
+        <result property="usrGrd" column="usr_grd"/>
+        <result property="fnSearchYn" column="fn_search_yn"/>
+        <result property="fnSaveYn" column="fn_save_yn"/>
+        <result property="fnDeleteYn" column="fn_delete_yn"/>
+        <result property="fnExcelYn" column="fn_excel_yn"/>
+        <result property="fnUpdateYn" column="fn_update_yn"/>
+    </resultMap>
+
+	<select id="SYSM400SEL01" parameterType="SYSM400VO" resultMap="result">
+        SELECT 
+        	menu_id AS id
+        	, menu_id
+        	, menu_nm
+        	, menu_typ_cd
+        	, prs_menu_lvl
+        	, srt_seq_no
+        	, icon_typ_clss
+        	, hgrk_menu_id
+        	, mapg_vlu1
+        	, data_frm_id
+        	, menu_state
+        FROM vl_menu_mgnt
+        ORDER BY srt_seq_no ASC
+    </select>
+    
+    <insert id="SYSM400INS01" parameterType="java.util.List">
+        <foreach collection="list" item="item" separator=";">
+            INSERT INTO VL_MENU_MGNT
+            ( menu_id
+            , menu_nm
+            , menu_typ_cd
+            , prs_menu_lvl
+            , srt_seq_no
+            , icon_typ_clss
+            , hgrk_menu_id
+            , mapg_vlu1
+            , data_frm_id
+            , menu_state
+            , reg_dtm
+            , regr_id
+            , lst_corc_dtm
+            , lst_corpr_id
+            )
+            VALUES
+            ( #{item.menuId}
+            , #{item.menuNm}
+            , #{item.menuTypCd}
+            , #{item.prsMenuLvl}
+            , #{item.srtSeqNo}
+            , #{item.iconTypClss}
+            , #{item.hgrkMenuId}
+            , #{item.mapgVlu1}
+            , #{item.dataFrmId}
+            , #{item.menuState}
+            , GETDATE()
+            , #{item.regrId}
+            , GETDATE()
+            , #{item.lstCorprId}
+            )
+        </foreach>
+    </insert>
+    
+    <insert id="SYSM400INS02" parameterType="java.util.List">
+        <foreach collection="list" item="item" separator=";">
+            INSERT INTO VL_GRDBY_MENU_ATHT
+            ( TenantPrefix
+	            , menu_id
+	            , usr_grd
+	            , fn_search_yn
+	            , fn_save_yn
+	            , fn_delete_yn
+	            , fn_excel_yn
+	            , reg_dtm
+	            , regr_id
+	            , lst_corc_dtm
+	            , lst_corpr_id
+	            , fn_update_yn
+	            , SystemIdx
+            )
+            VALUES
+            ( #{item.tenantPrefix}
+	            , #{item.menuId}
+	            , #{item.usrGrd}
+	            , #{item.fnSearchYn}
+	            , #{item.fnSaveYn}
+	            , #{item.fnDeleteYn}
+	            , #{item.fnExcelYn}
+	            , GETDATE()
+	            , #{item.regrId}
+	            , GETDATE()
+	            , #{item.lstCorprId}
+	            , #{item.fnUpdateYn}
+	            , #{item.systemIdx}
+            )
+        </foreach>
+    </insert>
+
+	<update id="SYSM400UPT01" parameterType="java.util.List">
+        <foreach collection="list" item="item" separator=";">
+            UPDATE VL_MENU_MGNT
+            SET menu_id = #{item.menuId}
+            , menu_nm = #{item.menuNm}
+            , menu_typ_cd = #{item.menuTypCd}
+            , srt_seq_no = #{item.srtSeqNo}
+            , icon_typ_clss = #{item.iconTypClss}
+            , hgrk_menu_id = #{item.hgrkMenuId}
+            , mapg_vlu1 = #{item.mapgVlu1}
+            , data_frm_id = #{item.dataFrmId}
+            , menu_state = #{item.menuState}
+            , lst_corc_dtm = GETDATE()
+            , lst_corpr_id = #{item.lstCorprId}
+            WHERE menu_id = #{item.id}
+        </foreach>
+    </update>
+
+    <update id="SYSM400UPT02" parameterType="java.util.List">
+        <foreach collection="list" item="item" separator=";">
+            UPDATE VL_MENU_MGNT
+            SET hgrk_menu_id = #{item.menuId}
+            WHERE hgrk_menu_id = #{item.id}
+        </foreach>
+    </update>
+    
+    <update id="SYSM400UPT03" parameterType="java.util.List">
+        <foreach collection="list" item="item" separator=";">
+            UPDATE VL_GRDBY_MENU_ATHT
+            SET menu_id = #{item.menuId}
+            WHERE menu_id = #{item.id}
+        </foreach>
+    </update>
+    
+    <update id="SYSM400UPT04" parameterType="java.util.List">
+        <foreach collection="list" item="item" separator=";">
+            WITH tree_query AS 
+			(
+			    SELECT menu_id, hgrk_menu_id 
+			    FROM VL_MENU_MGNT 
+			    WHERE hgrk_menu_id = #{item.id}
+			    
+			    UNION ALL 
+			    
+			    SELECT B.menu_id, B.hgrk_menu_id
+			    FROM VL_MENU_MGNT AS B
+			    INNER JOIN tree_query AS C ON B.hgrk_menu_id = C.menu_id 
+			)
+			UPDATE VL_MENU_MGNT
+			SET menu_state = #{item.menuState}
+			WHERE menu_id IN (SELECT menu_id FROM tree_query)
+			AND menu_state != '300'
+        </foreach>
+    </update>
+    
+    <delete id="SYSM400DEL01" parameterType="java.util.List">
+        <foreach collection="list" item="item" separator=";">
+            DELETE FROM VL_MENU_MGNT
+            WHERE menu_id = #{item.id}
+        </foreach>
+    </delete>
+
+    <delete id="SYSM400DEL02" parameterType="java.util.List">
+        <foreach collection="list" item="item" separator=";">
+            DELETE FROM VL_GRDBY_MENU_ATHT
+            WHERE menu_id = #{item.id}
+        </foreach>
+    </delete>
+</mapper>

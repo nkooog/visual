@@ -1,0 +1,12 @@
+bcs\vl\opst\VO\OPST100VO.class
+bcs\vl\opst\VO\OPST200VO.class
+bcs\vl\opst\service\OPST200Service.class
+bcs\vl\opst\service\impl\OPST100ServiceImpl.class
+bcs\vl\opst\service\impl\OPST200ServiceImpl.class
+bcs\vl\config\RestTemplateCustom.class
+bcs\vl\opst\web\OPST100Controller.class
+bcs\vl\opst\service\OPST100Service.class
+bcs\vl\opst\service\mapper\OPST100Mapper.class
+bcs\vl\lgin\service\impl\LGIN000ServiceImpl.class
+bcs\vl\opst\service\mapper\OPST200Mapper.class
+bcs\vl\opst\web\OPST200Controller.class

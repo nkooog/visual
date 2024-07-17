@@ -1,0 +1,11 @@
+POST http://tst.exona.kr:18080/v1/auth
+Content-Type: application/json
+
+{
+  "Name" : "Authentication",
+  "Method": "Create",
+  "Parameter": {
+    "ClientId": "8LR9HL5wcSLNWr0kjWBE",
+    "ClientSecret": "CCmnp6YJLlFy3SFvbSejiTOZWFnjDGV9qRuKHS17"
+  }
+}

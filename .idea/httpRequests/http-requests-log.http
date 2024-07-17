@@ -1,0 +1,399 @@
+POST http://tst.exona.kr:18080/v1/auth
+Content-Type: application/json
+Content-Length: 275
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "Name" :  "Authentication",
+    "Method":  "Create",
+    "Parameter":  {
+        "ClientId":  "8LR9HL5wcSLNWr0kjWBE",
+        "ClientSecret":  "CCmnp6YJLlFy3SFvbSejiTOZWFnjDGV9qRuKHS17"
+    }
+}
+
+<> 2024-04-04T135422.400.json
+
+###
+
+POST http://tst.exona.kr:18080/v1/auth
+Content-Type: application/json
+Content-Length: 275
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "Name" :  "Authentication",
+    "Method":  "Create",
+    "Parameter":  {
+        "ClientId":  "8LR9HL5wcSLNWr0kjWBE",
+        "ClientSecret":  "CCmnp6YJLlFy3SFvbSejiTOZWFnjDGV9qRuKHS17"
+    }
+}
+
+<> 2024-04-04T135418.400.json
+
+###
+
+POST http://tst.exona.kr:18080/v1/auth
+Content-Type: application/json
+Content-Length: 178
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "Name" : "Authentication",
+  "Method": "Create",
+  "Parameter": {
+    "ClientId": "8LR9HL5wcSLNWr0kjWBE",
+    "ClientSecret": "CCmnp6YJLlFy3SFvbSejiTOZWFnjDGV9qRuKHS17"
+  }
+}
+
+<> 2024-04-04T135405.200.json
+
+###
+
+POST http://tst.exona.kr:18080/v1/auth
+Content-Type: application/json
+Content-Length: 276
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "Name" :  "Authentication",
+    "Method":  "Create",
+    "Parameter":  {
+        "ClientId":  "YPwTJeH1rxMxwG1SGsY4w",
+        "ClientSecret":  "3ktA_f5KKl1WXDzzViVjiA2uVcvdpgEcMyePibZA"
+    }
+}
+
+<> 2024-04-04T135400.400.json
+
+###
+
+POST http://tst.exona.kr:18080/v1/auth
+Content-Type: application/json
+Content-Length: 276
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "Name" :  "Authentication",
+    "Method":  "Create",
+    "Parameter":  {
+        "ClientId":  "YPwTJeH1rxMxwG1SGsY4w",
+        "ClientSecret":  "3ktA_f5KKl1WXDzzViVjiA2uVcvdpgEcMyePibZA"
+    }
+}
+
+<> 2024-04-04T135357.400.json
+
+###
+
+POST http://tst.exona.kr:18080/v1/auth
+Content-Type: application/json
+Content-Length: 271
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "Name" : "Authentication",
+    "Method": "Create",
+    "Parameter": {
+        "ClientId": "YPwTJeH1rxMxwG1SGsY4w",
+        "ClientSecret": "3ktA_f5KKl1WXDzzViVjiA2uVcvdpgEcMyePibZA"
+    }
+}
+
+<> 2024-04-04T135338.400.json
+
+###
+
+POST http://tst.exona.kr:18080/v1/auth
+Content-Type: application/json
+header : ""
+Content-Length: 271
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "Name" : "Authentication",
+    "Method": "Create",
+    "Parameter": {
+        "ClientId": "YPwTJeH1rxMxwG1SGsY4w",
+        "ClientSecret": "3ktA_f5KKl1WXDzzViVjiA2uVcvdpgEcMyePibZA"
+    }
+}
+
+<> 2024-04-04T135317.400.html
+
+###
+
+POST http://tst.exona.kr:18080/v1/auth
+Content-Type: application/json
+header : ""
+Content-Length: 271
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "Name" : "Authentication",
+    "Method": "Create",
+    "Parameter": {
+        "ClientId": "YPwTJeH1rxMxwG1SGsY4w",
+        "ClientSecret": "3ktA_f5KKl1WXDzzViVjiA2uVcvdpgEcMyePibZA"
+    }
+}
+
+<> 2024-04-04T135309.400.html
+
+###
+
+POST http://tst.exona.kr:18080/v1/auth
+Content-Type: application/json
+Content-Length: 178
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "Name" : "Authentication",
+  "Method": "Create",
+  "Parameter": {
+    "ClientId": "8LR9HL5wcSLNWr0kjWBE",
+    "ClientSecret": "CCmnp6YJLlFy3SFvbSejiTOZWFnjDGV9qRuKHS17"
+  }
+}
+
+<> 2024-04-04T135246.200.json
+
+###
+
+POST http://tst.exona.kr:18080/v1/auth
+Content-Type: application/json
+Content-Length: 178
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "Name" : "Authentication",
+  "Method": "Create",
+  "Parameter": {
+    "ClientId": "8LR9HL5wcSLNWr0kjWBE",
+    "ClientSecret": "CCmnp6YJLlFy3SFvbSejiTOZWFnjDGV9qRuKHS17"
+  }
+}
+
+<> 2024-04-04T135233.200.json
+
+###
+
+POST http://tst.exona.kr:18080/v1/auth
+Content-Type: application/json
+header : ""
+Content-Length: 283
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "Name" : "LiteCallRecord",
+    "Method": "Get",
+  "Parameter": {
+        "System": "Bona2",
+        "Tenant": "DMO",
+        "CallId": "5b44f3c50a04b8ff7bd993e1199475bd1a0ea507@211.32.148.93"
+    }
+}
+
+<> 2024-04-04T135226.400.html
+
+###
+
+POST http://tst.exona.kr:18080/v1/auth
+Content-Type: application/json
+Content-Length: 271
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "Name" : "Authentication",
+    "Method": "Create",
+    "Parameter": {
+        "ClientId": "YPwTJeH1rxMxwG1SGsY4w",
+        "ClientSecret": "3ktA_f5KKl1WXDzzViVjiA2uVcvdpgEcMyePibZA"
+    }
+}
+
+<> 2024-04-04T135208.400.json
+
+###
+
+POST http://tst.exona.kr:18080/v1/auth
+Content-Type: application/json
+Content-Length: 177
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "Name" :"Authentication",
+  "Method": "Create",
+  "Parameter": {
+    "ClientId": "8LR9HL5wcSLNWr0kjWBE",
+    "ClientSecret": "CCmnp6YJLlFy3SFvbSejiTOZWFnjDGV9qRuKHS17"
+  }
+}
+
+<> 2024-04-04T135147.200.json
+
+###
+
+POST http://tst.exona.kr:18080/v1/auth
+Content-Type: application/json
+Content-Length: 178
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "Name" : "Authentication",
+  "Method": "Create",
+  "Parameter": {
+    "ClientId": "8LR9HL5wcSLNWr0kjWBE",
+    "ClientSecret": "CCmnp6YJLlFy3SFvbSejiTOZWFnjDGV9qRuKHS17"
+  }
+}
+
+<> 2024-04-04T135142.200.json
+
+###
+
+POST http://tst.exona.kr:18080/v1/auth
+Content-Type: application/json
+header : ""
+Content-Length: 283
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "Name" : "LiteCallRecord",
+    "Method": "Get",
+  "Parameter": {
+        "System": "Bona2",
+        "Tenant": "DMO",
+        "CallId": "5b44f3c50a04b8ff7bd993e1199475bd1a0ea507@211.32.148.93"
+    }
+}
+
+<> 2024-04-04T135130.400.html
+
+###
+
+POST http://tst.exona.kr:18080/v1/auth
+Content-Type: application/json
+Content-Length: 178
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "Name" : "Authentication",
+  "Method": "Create",
+  "Parameter": {
+    "ClientId": "8LR9HL5wcSLNWr0kjWBE",
+    "ClientSecret": "CCmnp6YJLlFy3SFvbSejiTOZWFnjDGV9qRuKHS17"
+  }
+}
+
+<> 2024-04-04T134849.200.json
+
+###
+
+POST http://tst.exona.kr:18080/v1/auth
+Content-Type: application/json
+Content-Length: 283
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "Name" : "LiteCallRecord",
+    "Method": "Get",
+  "Parameter": {
+        "System": "Bona2",
+        "Tenant": "DMO",
+        "CallId": "5b44f3c50a04b8ff7bd993e1199475bd1a0ea507@211.32.148.93"
+    }
+}
+
+<> 2024-04-04T134636.400.json
+
+###
+
+POST http://tst.exona.kr:18080/v1/auth
+Content-Type: application/json
+{"Name": "LiteCallHistory","Method":"Get","Parameter":{"System":"Bona2","Tenant":"DMO","StartTime":"2024-04-04 00:00:00","EndTime":"2024-04-04 12:59:59","NumberId":[],"RemoteNumber":"","CallSecond":""}}
+Content-Length: 0
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-04-04T134325.400.html
+
+###
+
+POST http://tst.exona.kr:18080/v1/auth
+Content-Type: application/json
+Content-Length: 178
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "Name" : "Authentication",
+  "Method": "Create",
+  "Parameter": {
+    "ClientId": "8LR9HL5wcSLNWr0kjWBE",
+    "ClientSecret": "CCmnp6YJLlFy3SFvbSejiTOZWFnjDGV9qRuKHS17"
+  }
+}
+
+<> 2024-04-04T134259.200.json
+
+###
+
+POST http://tst.exona.kr:18080/v1/auth
+Content-Type: application/json
+Content-Length: 178
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "Name" : "Authentication",
+  "Method": "Create",
+  "Parameter": {
+    "ClientId": "8LR9HL5wcSLNWr0kjWBE",
+    "ClientSecret": "CCmnp6YJLlFy3SFvbSejiTOZWFnjDGV9qRuKHS17"
+  }
+}
+
+<> 2024-04-04T134213.200.json
+
+###
+

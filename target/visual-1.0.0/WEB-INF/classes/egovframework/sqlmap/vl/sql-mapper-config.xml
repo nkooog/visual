@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+ 
+  <settings>
+        <setting name="cacheEnabled" value="false" />
+        <setting name="jdbcTypeForNull" value="NULL" />
+  </settings>
+  
+    <typeAliases>
+		<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+		<!-- ============= 로그인 ========================================================================= -->
+	    <typeAlias alias="LGIN000VO" type="bcs.vl.lgin.VO.LGIN000VO"/>
+		<!-- ============= 웹프레임 ========================================================================= -->
+		<typeAlias alias="FRME100VO" type="bcs.vl.frme.VO.FRME100VO"/>
+		<typeAlias alias="FRME110VO" type="bcs.vl.frme.VO.FRME110VO"/>
+		<!-- ============= 공통 ========================================================================= -->
+		<typeAlias alias="COMM100VO" type="bcs.vl.comm.VO.COMM100VO"/>
+		<typeAlias alias="COMM110VO" type="bcs.vl.comm.VO.COMM110VO"/>
+		<typeAlias alias="COMM120VO" type="bcs.vl.comm.VO.COMM120VO"/>
+		<typeAlias alias="MessageBodyVO" type="bcs.vl.cmmn.VO.MessageBodyVO"/>
+
+		<!-- ============= 운영관리 ========================================================================= -->
+		<typeAlias alias="OPMT100VO" type="bcs.vl.opmt.VO.OPMT100VO"/>	
+		<typeAlias alias="OPMT200VO" type="bcs.vl.opmt.VO.OPMT200VO"/>
+		
+		<!-- ============= 운영현황 ========================================================================= -->
+		<typeAlias alias="OPST100VO" type="bcs.vl.opst.VO.OPST100VO"/>	
+		<typeAlias alias="OPST200VO" type="bcs.vl.opst.VO.OPST200VO"/>
+		
+		<!-- ============= 로그 ========================================================================= -->
+		<typeAlias alias="LOGM100VO" type="bcs.vl.logm.VO.LOGM100VO"/>	
+
+		<!-- ============= 시스템관리 ========================================================================= -->
+		<typeAlias alias="SYSM100VO" type="bcs.vl.sysm.VO.SYSM100VO"/>	
+		<typeAlias alias="SYSM200VO" type="bcs.vl.sysm.VO.SYSM200VO"/>
+		<typeAlias alias="SYSM201VO" type="bcs.vl.sysm.VO.SYSM201VO"/>
+		<typeAlias alias="SYSM210VO" type="bcs.vl.sysm.VO.SYSM210VO"/>
+		<typeAlias alias="SYSM300VO" type="bcs.vl.sysm.VO.SYSM300VO"/>
+		<typeAlias alias="SYSM400VO" type="bcs.vl.sysm.VO.SYSM400VO"/>
+		<typeAlias alias="SYSM410VO" type="bcs.vl.sysm.VO.SYSM410VO"/>
+		<typeAlias alias="SYSM500VO" type="bcs.vl.sysm.VO.SYSM500VO"/>
+		<typeAlias alias="SYSM500VO" type="bcs.vl.sysm.VO.SYSM500VO"/>
+	</typeAliases>
+
+    
+</configuration>

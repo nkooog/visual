@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bcs.vl.comm.service.mapper.COMM100Mapper">
+
+<!--     <resultMap id="rtn_codeList" type="bcs.vl.comm.VO.COMM100VO"> -->
+<!--         <result property="mgntItemCd"  column="mgnt_item_cd"/> -->
+<!--         <result property="comCd"       column="com_cd"/> -->
+<!--         <result property="comCdNm"     column="com_cd_nm"/> -->
+<!--         <result property="mapgVlu1"    column="mapg_vlu1"/> -->
+<!--         <result property="mapgVlu2"    column="mapg_vlu2"/> -->
+<!--         <result property="mapgVlu3"    column="mapg_vlu3"/> -->
+<!--         <result property="hgrkComCd"   column="hgrk_com_cd"/> -->
+<!--         <result property="srtSeq"      column="srt_seq"/> -->
+<!-- 		<result property="subMgntItemCd"      column="sub_mgnt_item_cd"/> -->
+<!--     </resultMap> -->
+    
+    <resultMap id="rtn_codeList" type="bcs.vl.comm.VO.COMM100VO">
+        <result property="code"  column="CODE"/>
+        <result property="codeName"       column="CODE_NAME"/>
+        <result property="category"     column="CATEGORY"/>
+        <result property="useYn"    column="USEYN"/>
+    </resultMap>
+ 
+     <resultMap id="rtn_tenantInfo" type="bcs.vl.comm.VO.COMM100VO">
+        <result property="systemIdx"    	column="SystemIdx"/>
+        <result property="tenantPrefix"		column="TenantPrefix"/>
+        <result property="tenantName"   	column="TenantName"/>
+        <result property="isEnabled"		column="IsEnabled"/>
+        <result property="description"		column="Description"/>
+    </resultMap>
+    
+     <resultMap id="rtn_orgInfo" type="bcs.vl.comm.VO.COMM100VO">
+        <result property="tenantPrefix"    column="tenant_id"/>
+        <result property="orgCd"       column="org_cd"/>
+        <result property="orgNm"       column="org_nm"/>
+        <result property="orgPath"     column="org_path"/>
+    </resultMap>
+    
+	<resultMap id="rtn_menuFnAuth" type="bcs.vl.comm.VO.COMM100VO">
+		<result property="tenantPrefix"    column="TenantPrefix"/>
+		<result property="menuId"       column="menu_id"/>
+		<result property="usrGrd"       column="usr_grd"/>
+		<result property="fnSearchYn"     column="fn_search_yn"/>
+		<result property="fnSaveYn"     column="fn_save_yn"/>
+		<result property="fnDeleteYn"     column="fn_delete_yn"/>
+		<result property="fnExcelYn"     column="fn_excel_yn"/>
+		<result property="fnUpdateYn"     column="fn_update_yn"/>
+	</resultMap>
+    
+<!-- 	<select id="COMM100SEL01" parameterType="java.util.HashMap" resultMap="rtn_codeList"> resultMap="rtn_codeList" or resultType="COMM100VO" -->
+<!-- 			SELECT -->
+<!-- 				 mgnt_item_cd -->
+<!-- 			,    com_cd -->
+<!-- 			,    com_cd_nm -->
+<!-- 			,    mapg_vlu1 -->
+<!-- 			,    mapg_vlu2 -->
+<!-- 			,    mapg_vlu3 -->
+<!-- 			,    hgrk_com_cd -->
+<!-- 			,    srt_seq -->
+<!-- 			,    sub_mgnt_item_cd -->
+<!-- 			FROM t_com_cd -->
+<!-- 			WHERE 1=1 -->
+<!-- 			<if test="mgntItemCdListMap !=null">  -->
+<!-- 			AND  mgnt_item_cd IN    -->
+<!-- 			<foreach collection="mgntItemCdListMap" item="item" index="index" separator="," open="(" close=")"> -->
+<!-- 				#{item} -->
+<!--             </foreach> -->
+<!--             </if> -->
+<!--             AND  mling_cd  = #{mlingCd} -->
+<!--             AND  use_dv_cd = 'Y' -->
+<!-- 			ORDER BY mgnt_item_cd, srt_seq -->
+<!-- 	</select> -->
+
+	<select id="COMM100SEL01" parameterType="java.util.HashMap" resultMap="rtn_codeList"> <!-- resultMap="rtn_codeList" or resultType="COMM100VO" -->
+			SELECT
+				 CODE
+			,    CODE_NAME
+			,    CATEGORY
+			,    USEYN
+			FROM TB_CODE
+			WHERE 1=1
+			<if test="CATEGORYListMap !=null"> 
+			AND  CATEGORY IN   
+			<foreach collection="CATEGORYListMap" item="item" index="index" separator="," open="(" close=")">
+				#{item}
+            </foreach>
+            </if>
+            AND  USEYN = 1
+			ORDER BY CODE ASC
+	</select>
+	
+	<select id="COMM100SEL02" parameterType="COMM100VO" resultMap="rtn_tenantInfo">
+			SELECT
+					A.SystemIdx
+				,	 A.TenantPrefix
+				,    A.TenantName
+				,    A.IsEnabled
+				,    A.Description
+				, (SELECT SystemName FROM SystemInfo B WHERE B.SystemIdx = A.SystemIdx) AS systemName
+			FROM TenantInfo A
+			WHERE 1=1
+			<if test="tenantPrefix !=null"> 
+				AND  A.TenantPrefix = #{tenantPrefix}
+			</if>
+			<if test="isEnabled !=null"> 
+				AND  A.IsEnabled != #{isEnabled}
+			</if>
+	</select>	
+	
+	<select id="COMM100SEL03" parameterType="COMM100VO" resultMap="rtn_orgInfo"> 
+			WITH RECURSIVE org(tenant_id, org_cd, hgrk_org_cd, org_nm, depth, path, cycle) as 
+			(
+				SELECT g.tenant_id,  g.org_cd, g.hgrk_org_cd, g.org_nm, 1, array[row(g.org_nm)], false
+				FROM   t_org_cd g
+				WHERE  g.tenant_id= #{tenantPrefix}
+				AND    g.hgrk_org_cd is null
+				UNION ALL
+				SELECT g.tenant_id,  g.org_cd, g.hgrk_org_cd, g.org_nm, og.depth + 1, path || row(g.org_nm), row(g.org_nm) = any(path)
+				FROM   t_org_cd g, org og
+				WHERE  g.tenant_id= #{tenantPrefix}
+				AND    g.hgrk_org_cd = og.org_cd 
+				AND NOT CYCLE 
+			)
+			SELECT 
+			    tenant_id,
+			    org_cd,
+			    org_nm,
+			    REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(CAST(path AS VARCHAR), '{"(\"',''),'\")"',''),',', '→'),'(',''),')}',''),'}',''),'"\"',''),')',''), '{', '') AS org_path
+			FROM org 
+			WHERE org_cd = #{orgCd}
+			;			
+	</select>
+	
+	<select id="COMM100SEL04" parameterType="COMM100VO" resultMap="rtn_codeList">
+		SELECT 
+			 mgnt_item_cd
+			,com_cd
+			,com_cd_nm
+			,mapg_vlu1
+			,mapg_vlu2
+			,mapg_vlu3
+			,hgrk_com_cd
+			,srt_seq
+			from t_com_cd
+		<where>
+			AND use_dv_cd = 'Y'
+			AND mgnt_item_cd = #{mgntItemCd}
+			<if test='mlingCd != null and mlingCd != ""'>
+				AND mling_cd  = #{mlingCd}
+			</if>
+			<if test='comCd != null and comCd != ""'>
+				AND com_cd = #{comCd}
+			</if>
+		</where> 
+	</select>
+	
+	<select id="COMM100SEL05" parameterType="COMM100VO" resultMap="rtn_codeList">
+		SELECT
+			 mgnt_item_cd
+		,    com_cd
+		,    com_cd_nm
+		,    mapg_vlu1
+		,    mapg_vlu2
+		,    mapg_vlu3
+		,    hgrk_com_cd
+		,    srt_seq
+		,    sub_mgnt_item_cd
+		FROM t_com_cd
+		<where>
+			AND mling_cd = #{mlingCd}
+			AND mgnt_item_cd = (
+				select
+					sub_mgnt_item_cd
+				from t_com_cd
+				where mling_cd = #{mlingCd}
+				AND mgnt_item_cd = #{mgntItemCd}
+				and com_cd = #{comCd}
+			)
+		</where>
+		ORDER BY srt_seq ASC
+	</select>
+
+	<select id="COMM100SEL06" parameterType="java.util.HashMap" resultMap="rtn_codeList"> <!-- resultMap="rtn_codeList" or resultType="COMM100VO" -->
+		SELECT
+		'상담유형' as mgnt_item_cd
+		,    CNSL_TYP_CD as com_cd
+		,    CNSL_TYP_LVL_NM as com_cd_nm
+		FROM t_cnsl_typ_cd
+		WHERE 1=1
+		AND  DATA_CRE_YN  = 'Y'
+		AND  USE_DV_CD = 'Y'
+		AND  ABOL_DTM is null
+		ORDER BY CNSL_TYP_CD
+	</select>
+
+	<select id="COMM100SEL07" parameterType="COMM100VO" resultMap="rtn_menuFnAuth"> 
+		SELECT 
+			A.TenantPrefix
+			, A.menu_id
+			, A.usr_grd
+			, A.fn_search_yn
+			, A.fn_save_yn
+			, A.fn_delete_yn
+			, A.fn_excel_yn
+			, A.fn_update_yn
+		FROM VL_GRDBY_MENU_ATHT A
+		LEFT JOIN VL_MENU_MGNT B ON (A.menu_id = B.menu_id)
+		WHERE 1=1
+		AND A.SystemIdx = #{systemIdx}
+		AND A.TenantPrefix = #{tenantPrefix}
+		AND A.menu_id = #{menuId}
+<!-- 		AND A.usr_grd = (SELECT usr_grd FROM TB_USER WHERE TenantPrefix = #{tenantPrefix} AND AgentId = #{agentId}) -->
+		AND A.usr_grd = #{usrGrd}
+		<if test='mapgVlu1 != null and mapgVlu1 != ""'>
+			AND B.mapg_vlu1 = #{mapgVlu1}
+		</if>
+		AND B.data_frm_id = #{dataFrmId}
+	</select>
+	
+	<insert id="userLogInsert" parameterType="COMM100VO">
+		INSERT INTO VL_USER_LOG
+		( 	TenantPrefix
+			, data_frm_id
+			, url
+			, param_data
+			, result_type
+			, error_msg
+			, reg_dtm
+			, regr_id
+			, origin_tenantPrefix
+			, origin_regr_id
+		)
+		VALUES
+		(	#{tenantPrefix}
+			, #{dataFrmId}
+			, #{mapgVlu1}
+			, #{paramData}
+			, #{resultType}
+			, #{errorMsg}
+			, GETDATE()
+			, #{regrId}
+			, #{originTenantPrefix}
+			, #{originRegrId}
+		)
+    </insert>
+</mapper>	

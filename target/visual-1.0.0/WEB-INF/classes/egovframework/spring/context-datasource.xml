@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/jdbc  http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd">
+
+
+	<!--CRM Properties ================================================================================================= -->
+	<!-- 인하대 CRM 운영 DB-->
+<!-- 	<bean id="dataSourceCRM" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> -->
+<!-- 		<property name="driverClassName" value="org.postgresql.Driver"/> -->
+<!-- 		<property name="url" value="jdbc:postgresql://192.168.60.42:5432/crmdb" /> -->
+<!-- 		<property name="username" value="appcrm" /> -->
+<!-- 		<property name="password" value="Inhauh*192" /> -->
+<!-- 		<property name="connectionInitSqls"><list><value>SET TIMEZONE TO 'Asia/Seoul'</value></list></property> -->
+<!-- 	</bean> -->
+
+	<!--사내 CRM 개발 DB -->
+	<bean id="dataSourceCRM" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${Globals.driverClassName}"/>
+		<property name="url" value="${Globals.url}" />
+		<property name="username" value="${Globals.username}" />
+		<property name="password" value="${Globals.password}" />
+	</bean>
+	
+	<!-- CRM DB 용 log4j -->
+	<bean id="dataSource1" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+		<constructor-arg ref="dataSourceCRM"/>
+		<property name="logFormatter">
+			<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+				<property name="loggingType" value="MULTI_LINE" />
+				<property name="sqlPrefix" value="SQL         :  "/>
+			</bean>
+		</property>
+	</bean>
+	<!--END CRM Properties ============================================================================================= -->
+
+
+	<!--EMR Properties ================================================================================================= -->
+	<!--인하대 EMR 개발 DB-->
+	
+	<bean id="dataSourceEMR" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.intersys.jdbc.CacheDriver"/>
+		<property name="url" value="jdbc:Cache://128.3.1.170:1972/KOREA" />
+		<property name="username" value="callcenter" />
+		<property name="password" value="cc1357!@#" />
+	</bean>
+	
+
+	<!--인하대 EMR 운영 DB-->
+<!-- 	<bean id="dataSourceEMR" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> -->
+<!-- 		<property name="driverClassName" value="com.intersys.jdbc.CacheDriver"/> -->
+<!-- 		<property name="url" value="jdbc:Cache://128.1.70.1:1972/KOREA" /> -->
+<!-- 		<property name="username" value="callcenter" /> -->
+<!-- 		<property name="password" value="cc1357!@#" /> -->
+<!-- 	</bean> -->
+
+	<!-- EMR DB 용 log4j -->
+	<bean id="dataSource2" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+		<constructor-arg ref="dataSourceEMR"/>
+		<property name="logFormatter">
+			<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+				<property name="loggingType" value="MULTI_LINE" />
+				<property name="sqlPrefix" value="SQL         :  "/>
+			</bean>
+		</property>
+	</bean>
+	<!--END EMR Properties ============================================================================================= -->
+
+	<!--SMS Properties ================================================================================================= -->
+	<!--사내 SMS 개발 DB-->
+
+	<bean id="dataSourceSMS" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+		<property name="url" value="jdbc:sqlserver://211.61.156.10:1433;databaseName=KAKAO" />
+		<property name="username" value="icadmin" />
+		<property name="password" value="!Ttic123" />
+	</bean>
+
+	<!-- 인하대 SMS 운영 DB-->
+<!-- 	<bean id="dataSourceSMS" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> -->
+<!-- 		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/> -->
+<!-- 		<property name="url" value="jdbc:sqlserver://128.1.140.100:1433;databaseName=KAKAO" /> -->
+<!-- 		<property name="username" value="broadcns" /> -->
+<!-- 		<property name="password" value="!12345qwert" /> -->
+<!-- 	</bean> -->
+
+	<!-- SMS DB 용 log4j -->
+	<bean id="dataSource3" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+		<constructor-arg ref="dataSourceSMS"/>
+		<property name="logFormatter">
+			<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+				<property name="loggingType" value="MULTI_LINE" />
+				<property name="sqlPrefix" value="SQL         :  "/>
+			</bean>
+		</property>
+	</bean>
+	<!--END SMS Properties============================================================================================== -->
+
+	<!--HRMS Properties ================================================================================================ -->
+	<!--사내 HRMS 개발 DB -->
+
+	<bean id="dataSourceHRMS" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+		<property name="url" value="jdbc:sqlserver://211.61.156.10:1433;databaseName=InhaHRMS" />
+		<property name="username" value="icadmin" />
+		<property name="password" value="!Ttic123" />
+	</bean>
+
+	<!--인하대 HRMS 운영 DB-->
+<!-- 	<bean id="dataSourceHRMS" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> -->
+<!-- 		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/> -->
+<!-- 		<property name="url" value="jdbc:sqlserver://128.1.140.28:1433;databaseName=InhaHRMS" /> -->
+<!-- 		<property name="username" value="crm" /> -->
+<!-- 		<property name="password" value="!1234qwer!!" /> -->
+<!-- 	</bean> -->
+
+	<!-- SMS DB 용 log4j -->
+	<bean id="dataSource4" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+		<constructor-arg ref="dataSourceHRMS"/>
+		<property name="logFormatter">
+			<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+				<property name="loggingType" value="MULTI_LINE" />
+				<property name="sqlPrefix" value="SQL         :  "/>
+			</bean>
+		</property>
+	</bean>
+	<!--END HRMS Properties ============================================================================================ -->
+
+</beans>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bcs.vl.comm.service.mapper.COMM110Mapper">
+
+    <select id="COMM110SEL01" parameterType="COMM110VO" resultType="COMM110VO">
+        SELECT CODE   AS usrGrd,
+               CODE_NAME        AS usrGrdNm
+        FROM TB_CODE
+        WHERE 1=1
+          AND CATEGORY  = 'USERAUTHORITY'
+          AND USEYN 	= 1
+        ORDER BY CODE
+
+    </select>
+
+    <select id="COMM110SEL02" parameterType="COMM110VO" resultType="COMM110VO">
+        SELECT mgnt.tenant_id        AS tenantPrefix,
+                mgnt.usr_id           AS agentId,
+                mgnt.usr_grd          AS usrGrd,
+                mgnt.usr_nm           AS usrNm,
+                mgnt.org_cd           AS orgCd,
+                org.org_nm            AS orgNm,
+                tel.cti_use_yn        AS ctiUseYn,
+                tel.ext_no            AS extNo
+        FROM t_usr_info_mgnt mgnt
+        LEFT JOIN t_tele_set_inf tel
+                ON tel.tenant_id    = mgnt.tenant_id
+               AND tel.usr_id       = mgnt.usr_id
+        LEFT JOIN t_org_cd org
+                ON org.tenant_id    = mgnt.tenant_id
+               AND org.org_cd       = mgnt.org_cd
+        WHERE 1=1
+          AND mgnt.tenant_id    = #{tenantPrefix}
+          AND mgnt.usr_grd      = #{usrGrd}
+        ORDER BY mgnt.usr_id
+    </select>
+    
+    <select id="COMM110SEL04" parameterType="COMM110VO" resultType="COMM110VO">
+    	SELECT mgnt.usr_id AS agentId,
+		       mgnt.usr_nm AS usrNm
+		FROM   t_usr_info_mgnt mgnt
+		       LEFT JOIN t_cnsl_grp tcg
+		              ON mgnt.cnsl_grp_cd = tcg.cnsl_grp_cd
+		WHERE  1 = 1
+		       AND mgnt.tenant_id = #{tenantPrefix}
+		       AND tcg.cnsl_grp_queue_id notnull
+		       <if test='cnslGrpQueueId!=""'>
+		       		AND tcg.cnsl_grp_queue_id = #{cnslGrpQueueId}
+		       </if>
+    </select>
+
+</mapper>

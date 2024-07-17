@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bcs.vl.opmt.service.mapper.OPMT100Mapper">
+  
+	<!-- 사용자 목록 조회 -->
+	<select id="OPMT100SEL01" parameterType="OPMT100VO" resultType="OPMT100VO">
+			SELECT
+				  TU.TenantPrefix
+				, TU.AgentId
+				, TU.Name
+				, TU.Regdate
+				, TU.UseYN
+				, TU.usr_grd AS usrGrd
+				, TU.usr_lvl AS usrLvl
+				, TU.RegUsr
+				, TU.ModDate
+				, TU.ModUsr
+				, TU.SystemIdx
+				, SI.SystemName
+			FROM  TB_USER TU
+	   		LEFT JOIN  TenantInfo TI ON (TI.TenantPrefix = TU.TenantPrefix AND TI.SYSTEMIDX = TU.SYSTEMIDX AND TI.IsEnabled = 1) 
+	   		LEFT JOIN  SystemInfo SI ON (SI.SystemIdx = TU.SystemIdx AND SI.IsEnabled = 1)
+			WHERE 1=1
+			<!-- choose>
+				<when test='myUsrGrd != null and myUsrGrd != "00"'>
+					AND TU.usr_grd > #{myUsrGrd}
+				</when>
+				<otherwise>
+					
+				</otherwise>
+			</choose -->
+			<if test='systemIdx != null and systemIdx !=""'>
+				AND TU.SystemIdx = #{systemIdx}
+			</if>
+			<if test='tenantPrefix != null and tenantPrefix !=""'>
+				AND TU.TenantPrefix = #{tenantPrefix}
+			</if>
+			<if test='agentId != null and agentId !=""'>
+				AND TU.AgentId LIKE CONCAT('%', #{agentId}, '%')
+			</if>
+			<if test='name != null and name !=""'>
+				AND TU.Name LIKE CONCAT('%', #{name}, '%')
+			</if>
+			<if test='keyword != null and keyword !=""'>
+				AND (
+					   TU.AgentId LIKE CONCAT('%', #{keyword}, '%')
+					OR TU.Name    LIKE CONCAT('%', #{keyword}, '%')
+				)
+			</if>
+			<if test='useYn != null and useYn !=""'>
+				AND TU.UseYN = #{useYn}
+			</if>
+			<choose>
+			    <when test="sort == 'AgentId_ASC'">
+			        ORDER BY TU.AgentId ASC		-- COLLATE Latin1_General_CI_AS ASC
+			    </when>
+			    <when test="sort == 'AgentId_DESC'">
+			        ORDER BY TU.AgentId DESC	-- COLLATE Latin1_General_CI_AS DESC
+			    </when>
+			    <when test="sort == 'Name_ASC'">
+			        ORDER BY TU.Name ASC
+			    </when>
+			    <when test="sort == 'Name_DESC'">
+			        ORDER BY TU.Name DESC
+			    </when>
+			    <otherwise>
+			        ORDER BY TU.TenantPrefix ASC, TU.AgentId ASC
+			    </otherwise>
+			</choose>
+	</select>
+	
+	<!-- 사용자 중복검사 -->
+	<select id="OPMT100SEL02" parameterType="OPMT100VO" resultType="int">
+		SELECT
+			  COUNT(*) AS count
+		FROM TB_USER
+		WHERE 1=1
+		AND TenantPrefix = #{tenantPrefix}
+		AND AgentId = #{agentId}
+		AND SystemIdx = #{systemIdx}
+	</select>
+	
+	<!-- 사용자 등록 -->
+	<insert id="OPMT100INS01" parameterType="OPMT100VO">
+			INSERT INTO TB_USER
+			(
+				TenantPrefix
+				, AgentId
+				, Name
+				, Password
+				, Regdate
+				, UseYN
+				, usr_grd
+				, usr_lvl
+				, RegUsr
+				, ModDate
+				, ModUsr
+				, SystemIdx
+			)
+			VALUES (
+				#{tenantPrefix}
+				, #{agentId}
+				, #{name}
+				, #{password}
+				, GETDATE()
+				, #{useYn}
+				, #{usrGrd}
+				, #{usrLvl}
+				, #{regrId}
+				, GETDATE()
+				, #{lstCorprId}
+				, #{systemIdx}
+			)
+	</insert>
+	
+	<!-- 사용자 수정 -->
+	<update id="OPMT100UPT01" parameterType="OPMT100VO">
+			UPDATE TB_USER
+			SET    ModDate		=  GETDATE()
+			    ,  ModUsr		=  #{lstCorprId}
+			    ,  Name			=  #{name}
+				,  usr_grd		=  #{usrGrd}
+				,  usr_lvl		=  #{usrLvl}
+				,  UseYN		=  #{useYn}
+				<if test='password != null and password !=""'>
+				,  Password		=  #{password}
+				</if>
+			WHERE TenantPrefix = #{tenantPrefix}
+			  AND AgentId	   = #{agentId}
+			  AND SystemIdx = #{systemIdx}
+	</update>
+	
+</mapper>

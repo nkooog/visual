@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bcs.vl.frme.service.mapper.FRME100Mapper">
+
+    <resultMap id="result1" type="bcs.vl.frme.VO.FRME100VO">
+        <result property="agentId" column="AgentId"/>
+        <result property="tenantPrefix" column="TenantPrefix"/>
+        <result property="menuId" column="menu_id"/>
+        <result property="menuNm" column="menu_nm"/>
+        <result property="menuTypCd" column="menu_typ_cd"/>
+        <result property="prsMenuLvl" column="prs_menu_lvl"/>
+        <result property="hgrkMenuId" column="hgrk_menu_id"/>
+        <result property="dataFrmId" column="data_frm_id"/>
+        <result property="dataFrmeTmplCd" column="data_frme_tmpl_cd"/>
+        <result property="srtSeqNo" column="srt_seq_no"/>
+        <result property="iconTypClss" column="icon_typ_clss"/>
+        <result property="mlingCd" column="mling_cd"/>
+        <result property="mapgVlu1" column="mapg_vlu1"/>
+        <result property="usrGrd" column="usr_grd"/>
+        <result property="comCd" column="com_cd"/>
+    </resultMap>
+
+<!--     <select id="FRME100SEL01" parameterType="FRME100VO" resultMap="result1"> -->
+<!--         SELECT VMM.tenant_id -->
+<!--              , VMM.menu_id -->
+<!--              , VMM.menu_nm -->
+<!--              , VMM.menu_typ_cd -->
+<!--              , VMM.prs_menu_lvl -->
+<!--              , VMM.hgrk_menu_id -->
+<!--              , VMM.srt_seq_no -->
+<!--              , VMM.icon_typ_clss -->
+<!--              , VDF.data_frm_id -->
+<!--              , VDF.data_frme_tmpl_cd -->
+<!--              , VCC.mapg_vlu1 -->
+<!--              , VCC.com_cd -->
+<!--              , VGDFA.usr_grd -->
+<!--         FROM VL_MENU_MGNT VMM -->
+<!--                  LEFT JOIN VL_GRDBY_MENU_ATHT VGMA ON VMM.tenant_id = tgm.tenant_id AND VMM.menu_id = tgm.menu_id -->
+<!--                  LEFT JOIN VL_DATA_FRM VDF ON VMM.tenant_id = VDF.tenant_id AND VMM.data_frm_id = VDF.data_frm_id -->
+<!--                  LEFT JOIN VL_GRDBY_DATA_FRME_ATHT VGDFA ON VMM.tenant_id = VGDFA.tenant_id AND VMM.data_frm_id = VGDFA.data_frm_id AND VGDFA.usr_grd = tgm.usr_grd -->
+<!--                  LEFT JOIN VL_COM_CD VCC ON VDF.data_frme_clas_cd = VCC.com_cd AND VCC.mgnt_item_cd = 'C0018' -->
+<!--         WHERE VMM.tenant_id = #{tenantPrefix} -->
+<!--           AND VMM.mling_cd = #{mlingCd} -->
+<!--           AND tgm.usr_grd = #{usrGrd} -->
+<!--         ORDER BY VMM.srt_seq_no ASC -->
+<!--     </select> -->
+
+	<select id="FRME100SEL01" parameterType="FRME100VO" resultMap="result1">
+        SELECT 
+           tgm.TenantPrefix
+             , tmm.menu_id
+             , tmm.menu_nm
+             , tmm.menu_typ_cd
+             , tmm.prs_menu_lvl
+             , tmm.hgrk_menu_id
+             , tmm.srt_seq_no
+             , tmm.icon_typ_clss
+             , tmm.mapg_vlu1
+             , tmm.data_frm_id
+             , tgm.usr_grd
+        FROM vl_grdby_menu_atht tgm
+		LEFT JOIN vl_menu_mgnt tmm ON tmm.menu_id = tgm.menu_id
+        WHERE tgm.TenantPrefix = #{tenantPrefix}
+            AND tgm.SystemIdx = #{systemIdx}
+<!--           AND tgm.usr_grd = (SELECT usr_grd FROM TB_USER WHERE TenantPrefix = #{tenantPrefix} AND AgentId = #{agentId}) -->
+			AND tgm.usr_grd = #{usrGrd}
+            AND (tgm.usr_grd = '00' OR tmm.menu_state = '100')
+        ORDER BY tmm.srt_seq_no ASC
+    </select>
+
+</mapper>

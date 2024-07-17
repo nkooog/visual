@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bcs.vl.sysm.service.mapper.SYSM210Mapper">
+
+	<select id="SYSM210SEL01" parameterType="SYSM210VO" resultType="SYSM210VO">
+		SELECT
+			   tenant_group_id      					AS tenantGroupId
+			  , tenant_group_nm							AS tenantGroupNm
+		      , tenant_group_state						AS tenantGroupState
+			  , CONVERT(CHAR(19), reg_dtm, 120) 		AS regDtm
+			  , regr_id									AS regrId
+			  , CONVERT(CHAR(19), lst_corc_dtm, 120) 	AS lstCorcDtm
+			  , lst_corpr_id 							AS lstCorprId
+		FROM VL_TENANT_GROUP
+		WHERE 1=1
+		 <if test='!@bcs.vl.util.com.ComnFun@isEmpty(tenantGroupId)'>
+			AND tenant_group_id = #{tenantGroupId}
+		 </if>
+		 <if test='!@bcs.vl.util.com.ComnFun@isEmpty(tenantGroupNm)'>
+			AND tenant_group_nm like  '%'||#{tenantGroupNm}||'%'
+		 </if>
+		 <if test='!@bcs.vl.util.com.ComnFun@isEmpty(tenantGroupState)'>
+			AND tenant_group_state = #{tenantGroupState}
+		 </if>
+		order by tenant_group_id
+	</select>
+
+	<select id="SYSM210SEL02" parameterType="SYSM210VO" resultType="SYSM210VO">
+		SELECT
+			   tenant_group_id      					AS tenantGroupId
+			  , TenantPrefix							AS tenantPrefix
+			  , CONVERT(CHAR(19), reg_dtm, 120) 		AS regDtm
+			  , regr_id									AS regrId
+			  , CONVERT(CHAR(19), lst_corc_dtm, 120) 	AS lstCorcDtm
+			  , lst_corpr_id 							AS lstCorprId
+		FROM VL_TENANT_GROUP_ATHT
+		WHERE 1=1
+		 <if test='!@bcs.vl.util.com.ComnFun@isEmpty(tenantGroupId)'>
+			AND tenant_group_id = #{tenantGroupId}
+		 </if>
+		order by TenantPrefix
+	</select>
+	
+	<select id="SYSM210SEL03" parameterType="SYSM210VO" resultType="SYSM210VO">
+		SELECT
+			  COUNT(*) AS count
+		FROM VL_TENANT_GROUP
+		WHERE 1=1
+		AND tenant_group_id = #{tenantGroupId}
+	</select>
+	
+	<insert id="SYSM210INS01" parameterType="SYSM210VO">
+		INSERT INTO VL_TENANT_GROUP
+		( 	tenant_group_id
+			, tenant_group_nm
+			, tenant_group_state
+			, reg_dtm
+			, regr_id
+			, lst_corc_dtm
+			, lst_corpr_id
+		)
+		VALUES
+		(	 #{tenantGroupId}
+			, #{tenantGroupNm}
+			, #{tenantGroupState}
+			, GETDATE()
+			, #{regrId}
+			, GETDATE()
+			, #{lstCorprId}
+		)
+    </insert>
+
+    <update id="SYSM210UPT01" parameterType="SYSM210VO">
+		UPDATE VL_TENANT_GROUP
+		SET tenant_group_id = #{tenantGroupId}
+			, tenant_group_nm = #{tenantGroupNm}
+			, tenant_group_state = #{tenantGroupState}
+			, lst_corc_dtm = GETDATE()
+			, lst_corpr_id = #{lstCorprId}
+		WHERE tenant_group_id = #{tenantGroupIdKey}
+    </update>
+
+    <update id="SYSM210UPT02" parameterType="SYSM210VO">
+		UPDATE VL_TENANT_GROUP_ATHT
+		SET tenant_group_id = #{tenantGroupId}
+			, lst_corc_dtm = GETDATE()
+			, lst_corpr_id = #{lstCorprId}
+		WHERE tenant_group_id = #{tenantGroupIdKey}
+    </update>
+</mapper>
+

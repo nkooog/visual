@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+        <!--<PatternLayout pattern="%d %5p [%c][%L LINE] %m%n" />-->
+            <PatternLayout pattern="%d %5p [%c] %m%n" />
+        </Console>
+        <File name="error" fileName="/vl/logs/error/${date:yyyy}/${date:MM}/${date:yyyyMMdd}/errorlog_${date:yyyyMMdd_HH}.log">
+			<PatternLayout pattern="%d %5p [%c] %m%n" />
+		</File>  
+        <File name="cmmn" fileName="/vl/logs/cmmn/${date:yyyy}/${date:MM}/${date:yyyyMMdd}/cmmnapplog_${date:yyyyMMdd_HH}.log">
+			<PatternLayout pattern="%d %5p [%c] %m%n" />
+		</File>
+        <File name="cmmt" fileName="/vl/logs/cmmt/${date:yyyy}/${date:MM}/${date:yyyyMMdd}/cmmtapplog_${date:yyyyMMdd_HH}.log">
+			<PatternLayout pattern="%d %5p [%c] %m%n" />
+		</File>				        
+        <File name="cmpn" fileName="/vl/logs/cmpn/${date:yyyy}/${date:MM}/${date:yyyyMMdd}/cmpnapplog_${date:yyyyMMdd_HH}.log">
+			<PatternLayout pattern="%d %5p [%c] %m%n" />
+		</File>	
+        <File name="cnsl" fileName="/vl/logs/cnsl/${date:yyyy}/${date:MM}/${date:yyyyMMdd}/cnslapplog_${date:yyyyMMdd_HH}.log">
+			<PatternLayout pattern="%d %5p [%c] %m%n" />
+		</File>
+        <File name="comm" fileName="/vl/logs/comm/${date:yyyy}/${date:MM}/${date:yyyyMMdd}/commapplog_${date:yyyyMMdd_HH}.log">
+			<PatternLayout pattern="%d %5p [%c] %m%n" />
+		</File>		
+        <File name="dash" fileName="/vl/logs/dash/${date:yyyy}/${date:MM}/${date:yyyyMMdd}/dashapplog_${date:yyyyMMdd_HH}.log">
+			<PatternLayout pattern="%d %5p [%c] %m%n" />
+		</File>
+        <File name="frme" fileName="/vl/logs/frme/${date:yyyy}/${date:MM}/${date:yyyyMMdd}/frmeapplog_${date:yyyyMMdd_HH}.log">
+			<PatternLayout pattern="%d %5p [%c] %m%n" />
+		</File>		
+        <File name="kmst" fileName="/vl/logs/kmst/${date:yyyy}/${date:MM}/${date:yyyyMMdd}/kmstapplog_${date:yyyyMMdd_HH}.log">
+			<PatternLayout pattern="%d %5p [%c] %m%n" />
+		</File>
+        <File name="lgin" fileName="/vl/logs/lgin/${date:yyyy}/${date:MM}/${date:yyyyMMdd}/lginapplog_${date:yyyyMMdd_HH}.log">
+			<PatternLayout pattern="%d %5p [%c] %m%n" />
+		</File>	
+        <File name="sample" fileName="/vl/logs/sample/${date:yyyy}/${date:MM}/${date:yyyyMMdd}/sampleapplog_${date:yyyyMMdd_HH}.log">
+			<PatternLayout pattern="%d %5p [%c] %m%n" />
+		</File>										 			 		 
+        <File name="mcns" fileName="/vl/logs/mcns/${date:yyyy}/${date:MM}/${date:yyyyMMdd}/mcnsapplog_${date:yyyyMMdd_HH}.log">
+			<PatternLayout pattern="%d %5p [%c] %m%n" />
+		</File>
+        <File name="sysm" fileName="/vl/logs/sysm/${date:yyyy}/${date:MM}/${date:yyyyMMdd}/sysmapplog_${date:yyyyMMdd_HH}.log">
+			<PatternLayout pattern="%d %5p [%c] %m%n" />
+		</File>				
+    </Appenders>
+    <Loggers>
+		<logger name="bcs.vl.cmmn.web" level="trace" additivity="false" >       
+			<AppenderRef ref="cmmn" />  
+		</logger> 
+		<logger name="bcs.vl.cmmt.web" level="trace" additivity="false" >       
+			<AppenderRef ref="cmmt" />  
+		</logger> 	
+		<logger name="bcs.vl.cmpn.web" level="trace" additivity="false" >       
+			<AppenderRef ref="cmpn" />  
+		</logger> 		
+		<logger name="bcs.vl.cnsl.web" level="trace" additivity="false" >       
+			<AppenderRef ref="cnsl" />  
+		</logger> 
+		<logger name="bcs.vl.comm.web" level="trace" additivity="false" >       
+			<AppenderRef ref="comm" />  
+		</logger> 
+		<logger name="bcs.vl.dash.web" level="trace" additivity="false" >       
+			<AppenderRef ref="dash" />  
+		</logger> 
+		<logger name="bcs.vl.frme.web" level="trace" additivity="false" >       
+			<AppenderRef ref="frme" />  
+		</logger> 
+		<logger name="bcs.vl.kmst.web" level="trace" additivity="false" >       
+			<AppenderRef ref="kmst" />  
+		</logger> 	
+		<logger name="bcs.vl.lgin.web" level="trace" additivity="false" >       
+			<AppenderRef ref="lgin" />  
+		</logger> 	
+		<logger name="bcs.vl.mcns.web" level="trace" additivity="false" >       
+			<AppenderRef ref="mcns" />  
+		</logger> 
+		<logger name="bcs.vl.sample.web" level="trace" additivity="false" >       
+			<AppenderRef ref="sample" />  
+		</logger> 																						   
+		<logger name="bcs.vl.sysm.web" level="trace" additivity="false" >       
+			<AppenderRef ref="sysm" />  
+		</logger>
+        <Logger name="java.sql" level="INFO" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+        <Logger name="egovframework" level="DEBUG" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+        <Logger name="org.springframework" level="ERROR" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+        <Logger name="jdbc.sqlonly" level="INFO" additivity="false"> 
+	        <appender-ref ref="console" />
+        </Logger>
+        <Logger name="jdbc.sqltiming" level="INFO" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+		<Logger name="bcs.vl" level="DEBUG" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+        <Root level="ERROR">
+            <AppenderRef ref="console" />
+            <AppenderRef ref="error"/>
+        </Root>
+    </Loggers>
+</Configuration>

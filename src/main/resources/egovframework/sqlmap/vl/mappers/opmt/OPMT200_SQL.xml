@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bcs.vl.opmt.service.mapper.OPMT200Mapper">
+
+	<resultMap id="result" type="bcs.vl.opmt.VO.OPMT200VO">
+        <result property="systemname" column="SYSTEMNAME"/>
+        <result property="systemIdx" column="SYSTEMIDX"/>
+        <result property="tenantPrefix" column="TENANT"/>
+        <result property="savePath" column="SAVE_PATH"/>
+        <result property="realFileName" column="REAL_FILE_NAME"/>
+        <result property="fileName" column="FILE_NAME"/>
+        <result property="imgWidth" column="ImgWidth"/>
+        <result property="imgHeight" column="ImgHeight"/>
+        <result property="imgPath" column="IMG_PATH"/>
+        <result property="category" column="CATEGORY"/>
+        <result property="title" column="TITLE"/>
+        <result property="guideContent" column="DESCRIPTION_CONTENT"/>
+        <result property="guideSort" column="DESCRIPTION_SORT"/>
+        <result property="guideSize" column="DESCRIPTION_SIZE"/>
+        <result property="telnum" column="TELNUM"/>
+        <result property="backgroudColor" column="BACKGROUD_COLOR"/>
+        <result property="backgroudFontColor" column="BACKGROUD_FONT_COLOR"/>
+        <result property="buttonColor" column="BUTTON_COLOR"/>
+        <result property="buttonFontColor" column="BUTTON_FONT_COLOR"/>
+        <result property="bottomButtonUseyn" column="BOTTOM_BUTTON_USEYN"/>
+        <result property="bottomButtonCnt" column="BOTTOM_BUTTON_CNT"/>
+        <result property="regdate" column="REGDATE"/>
+        <result property="contentSeq" column="CONTENT_SEQ"/>
+        <result property="contentResult" column="CONTENT_RESULT"/>
+        <result property="fileyn" column="FILEYN"/>
+        <result property="sumButtonTitle" column="SUM_BUTTON_TITLE"/>
+        <result property="sumButtonLink" column="SUM_BUTTON_LINK"/>
+        <result property="sumButtonType" column="SUM_BUTTON_TYPE"/>
+        <result property="sumButtonSize" column="SUM_BUTTON_SIZE"/>
+        <result property="sumButtonUseyn" column="SUM_BUTTON_USEYN"/>
+        <result property="applyYn" column="APPLY_YN"/>
+    </resultMap>
+
+	<select id="OPMT200SEL01" parameterType="OPMT200VO" resultMap="result">
+		SELECT 
+			(SELECT SI.SYSTEMNAME FROM SYSTEMINFO SI WHERE TC.SYSTEMIDX = SI.SYSTEMIDX) AS SYSTEMNAME
+			, TC.SYSTEMIDX
+			, TC.TENANT 
+			, VIMG.SAVE_PATH
+			, VIMG.REAL_FILE_NAME
+			, VIMG.FILE_NAME
+			, VIMG.ImgWidth
+			, VIMG.ImgHeight
+			, CONCAT(VIMG.SAVE_PATH, VIMG.FILE_NAME) AS IMG_PATH
+			, TC.CATEGORY 
+			, TC.TITLE  
+			, TC.DESCRIPTION_CONTENT
+			, TC.DESCRIPTION_SORT
+			, TC.DESCRIPTION_SIZE
+			, TC.TELNUM 
+			, TC.BACKGROUD_COLOR
+			, TC.BACKGROUD_FONT_COLOR
+			, TC.BUTTON_COLOR
+			, TC.BUTTON_FONT_COLOR
+			, TC.BOTTOM_BUTTON_USEYN
+			, TC.BOTTOM_BUTTON_CNT		
+			, TC.REGDATE 
+			, TC.CONTENT_SEQ 
+			, TC.CONTENT_SEQ AS CONTENT_RESULT
+			, TC.FILEYN 
+			, TC.APPLY_YN
+		FROM TB_CONTENT TC 
+		LEFT JOIN TENANTINFO TI ON (TC.SYSTEMIDX = TI.SYSTEMIDX AND TC.TENANT = TI.TENANTPREFIX)
+		LEFT JOIN VISUALLETTERINGFILE VIMG ON (TC.CONTENT_SEQ = VIMG.CONTENT_SEQ)
+		WHERE 1=1
+		<if test='contentSeq != null and contentSeq !=""'>
+			AND TC.CONTENT_SEQ = #{contentSeq}
+		</if>
+		<if test='systemIdx != null and systemIdx !=""'>
+			AND TC.SystemIdx = #{systemIdx}
+		</if>
+		<if test='tenantPrefix != null and tenantPrefix !=""'>
+			AND TC.TENANT = #{tenantPrefix}
+		</if>
+		<if test='category != null and category !=""'>
+			AND TC.CATEGORY = #{category}
+		</if>
+		<if test='keyword != null and keyword !=""'>
+			AND
+			(
+				TC.TITLE 			LIKE CONCAT('%', #{keyword}, '%')
+				OR TC.TELNUM		LIKE CONCAT('%', #{keyword}, '%')
+				OR TC.CONTENT_SEQ	LIKE CONCAT('%', #{keyword}, '%')
+			)
+		</if>
+		AND TC.DELYN = 'N'
+		ORDER BY TC.REGDATE DESC
+	</select>
+	
+	<select id="OPMT200SEL04" parameterType="OPMT200VO" resultMap="result">
+		SELECT 
+			a.CONTENT_SEQ
+			, STUFF(
+				(SELECT 
+					'▣' + BUTTON_TITLE
+				FROM TB_BUTTON
+				WHERE CONTENT_SEQ = a.CONTENT_SEQ
+				<if test='useYn != null and useYn !=""'>
+					AND USEYN = #{useYn}
+				</if>
+				ORDER BY ORD
+				FOR XML PATH('')
+			), 1, 1, '') AS SUM_BUTTON_TITLE
+			, STUFF(
+				(SELECT 
+					'▣' + BUTTON_LINK
+				FROM TB_BUTTON
+				WHERE CONTENT_SEQ = a.CONTENT_SEQ
+				<if test='useYn != null and useYn !=""'>
+					AND USEYN = #{useYn}
+				</if>
+				ORDER BY ORD
+				FOR XML PATH('')
+			), 1, 1, '') AS SUM_BUTTON_LINK
+			, STUFF(
+				(SELECT 
+					'▣' + BUTTON_TYPE 
+				FROM TB_BUTTON
+				WHERE CONTENT_SEQ = a.CONTENT_SEQ
+				<if test='useYn != null and useYn !=""'>
+					AND USEYN = #{useYn}
+				</if>
+				ORDER BY ORD
+				FOR XML PATH('')
+			), 1, 1, '') AS SUM_BUTTON_TYPE
+			, STUFF(
+				(SELECT 
+					'▣' + BUTTON_SIZE  
+				FROM TB_BUTTON
+				WHERE CONTENT_SEQ = a.CONTENT_SEQ
+				<if test='useYn != null and useYn !=""'>
+					AND USEYN = #{useYn}
+				</if>
+				ORDER BY ORD
+				FOR XML PATH('')
+			), 1, 1, '') AS SUM_BUTTON_SIZE
+			, STUFF(
+				(SELECT 
+					'▣' + USEYN  
+				FROM TB_BUTTON
+				WHERE CONTENT_SEQ = a.CONTENT_SEQ
+				<if test='useYn != null and useYn !=""'>
+					AND USEYN = #{useYn}
+				</if>
+				ORDER BY ORD
+				FOR XML PATH('')
+			), 1, 1, '') AS SUM_BUTTON_USEYN
+		FROM TB_BUTTON a
+		WHERE 1=1
+		<if test='contentSeq != null and contentSeq !=""'>
+			AND CONTENT_SEQ = #{contentSeq}
+		</if>
+		GROUP BY a.CONTENT_SEQ
+	</select>
+
+	<insert id="OPMT200INS01" parameterType="OPMT200VO" useGeneratedKeys="true" keyProperty="contentSeq">
+		INSERT INTO TB_CONTENT
+		(
+			TENANT
+			, CATEGORY
+			, TITLE
+			<if test='guideContent != null and guideContent !=""'>
+				, DESCRIPTION_CONTENT
+				, DESCRIPTION_SORT
+				, DESCRIPTION_SIZE
+			</if>
+			, TELNUM
+			, BACKGROUD_COLOR
+			, BACKGROUD_FONT_COLOR
+			, BUTTON_COLOR
+			, BUTTON_FONT_COLOR
+			<if test='bottomButtonUseyn != null and bottomButtonUseyn !=""'>
+				, BOTTOM_BUTTON_USEYN
+			</if>
+			<if test='bottomButtonCnt != null and bottomButtonCnt !=""'>
+				, BOTTOM_BUTTON_CNT
+			</if>
+			, USER_ID
+			, REGDATE
+			, UPDATE_ID
+			, UPDATE_DATE
+			, FILEYN
+			, APPLY_YN
+			, SystemIdx
+		)
+		VALUES
+		(
+			#{tenantPrefix}
+			, #{category}
+			, #{title}
+			<if test='guideContent != null and guideContent !=""'>
+				, #{guideContent}
+				, #{guideSort}
+				, #{guideSize}
+			</if>
+			, #{telnum}
+			, #{backgroudColor}
+			, #{backgroudFontColor}
+			, #{buttonColor}
+			, #{buttonFontColor}
+			<if test='bottomButtonUseyn != null and bottomButtonUseyn !=""'>
+				, #{bottomButtonUseyn}
+			</if>
+			<if test='bottomButtonCnt != null and bottomButtonCnt !=""'>
+				, #{bottomButtonCnt}
+			</if>
+			, #{regId}
+			, GETDATE()
+			, #{regId}
+			, GETDATE()
+			, 'Y'
+			, 'N'
+			, #{systemIdx}
+		)
+	</insert>
+
+	<update id="OPMT2000UPT01" parameterType="OPMT200VO">
+		UPDATE TB_CONTENT
+		SET 
+			<if test='saveType != null and saveType != "" and saveType == "UPDT"'>
+				 TITLE = #{title}
+<!-- 				 <if test='guideContent != null and guideContent !=""'> -->
+					, DESCRIPTION_CONTENT = #{guideContent}
+					, DESCRIPTION_SORT = #{guideSort}
+					, DESCRIPTION_SIZE = #{guideSize}
+<!-- 				</if> -->
+				, TELNUM = #{telnum}
+				, BACKGROUD_COLOR = #{backgroudColor}
+				, BACKGROUD_FONT_COLOR = #{backgroudFontColor}
+				, BUTTON_COLOR = #{buttonColor}
+				, BUTTON_FONT_COLOR = #{buttonFontColor}
+				, BOTTOM_BUTTON_USEYN = #{bottomButtonUseyn}
+				, BOTTOM_BUTTON_CNT = #{bottomButtonCnt}
+				, UPDATE_ID = #{regId}
+				, UPDATE_DATE = GETDATE()
+			</if>
+			<if test='applyYn != null and applyYn != ""'>
+				, APPLY_YN = #{applyYn}
+			</if>
+		WHERE CONTENT_SEQ = #{contentSeq} 
+	</update>
+
+	<insert id="OPMT200INS02" parameterType="OPMT200VO">
+		INSERT INTO VISUALLETTERINGFILE
+		(
+			CONTENT_SEQ
+			, REAL_FILE_NAME
+			, SAVE_PATH
+			, FILE_NAME
+			, FILE_SIZE
+			, REG_TIME
+			, REG_ID
+			, Mime_Type
+			, ImgWidth
+			, ImgHeight
+		)
+		VALUES
+		(
+			#{contentSeq}
+			, #{realFileName}
+			, #{savePath}
+			, #{fileName}
+			, #{fileSize}
+			, GETDATE()
+			, #{regId}
+			, #{mimeType}
+			, #{imgWidth}
+			, #{imgHeight}
+		)
+	</insert>
+	
+	<update id="OPMT2000UPT02" parameterType="OPMT200VO">
+		UPDATE VISUALLETTERINGFILE
+			SET
+				FILE_NAME = #{fileName}
+				, FILE_SIZE = #{fileSize}
+				, REG_TIME = GETDATE()
+				, REG_ID = #{regId}
+				, Mime_Type = #{mimeType}
+				, ImgWidth = #{imgWidth}
+				, ImgHeight = #{imgHeight}
+		WHERE CONTENT_SEQ = #{contentSeq} 
+		AND SAVE_PATH = #{savePath}
+	</update>
+	
+	<insert id="OPMT200INS03" parameterType="OPMT200VO">
+		INSERT INTO TB_BUTTON
+		(
+			CONTENT_SEQ
+			, ORD
+			, BUTTON_TITLE
+			, BUTTON_LINK
+			, BUTTON_SIZE
+			, USEYN
+		)
+		VALUES
+		(
+			#{contentSeq} 
+			, #{ord}
+			, #{buttonTitle}
+			, #{buttonLink}	
+			, #{buttonSize}
+			, #{useYn}
+		)
+	</insert>
+
+	<delete id="OPMT200DEL03" parameterType="OPMT200VO">
+		DELETE FROM TB_BUTTON
+		WHERE CONTENT_SEQ = #{contentSeq} 
+	</delete>
+
+	<insert id="OPMT200INSLog" parameterType="OPMT200VO">
+		INSERT INTO ACTIONHISTORY
+		(
+			ACTION
+			, CONTENT_SEQ
+			, USER_ID
+			, REGDATE
+			, IP
+			, TENANT
+			, SystemIdx
+		)
+		VALUES
+		(
+			#{action}
+			, #{contentSeq} 
+			, #{regId}
+			, GETDATE()
+			, #{ip}
+			, #{tenantPrefix}
+			, #{systemIdx}
+		)
+	</insert>
+	
+	<insert id="OPMT201INS01" parameterType="OPMT200VO">
+		INSERT INTO BUTTONHISTORY
+		(
+			CONTENT_SEQ
+			, ORD
+			, TARGET
+			, IP
+			, REGDATE
+			, TITLE
+		)
+		VALUES
+		(
+			#{contentSeq} 
+			, #{ord} 
+			, #{buttonLink} 
+			, #{ip} 
+			, GETDATE()
+			, #{title}
+		)
+	</insert>
+	
+	<delete id="OPMT200DEL04" parameterType="OPMT200VO">
+		DELETE FROM MessageBodyParameter
+		WHERE 1=1 
+		AND SystemIdx = #{systemIdx} 
+		AND TenantPrefix = #{tenantPrefix} 
+		AND ParamName = #{paramName}
+	</delete>
+	
+	<insert id="OPMT200INS04" parameterType="OPMT200VO">
+		INSERT INTO MessageBodyParameter
+		(
+			SystemIdx
+			, TenantPrefix
+			, ServiceType
+			, MessageType
+			, ParamName
+			, ParamValue
+		)
+		VALUES
+		(
+			#{systemIdx}
+			, #{tenantPrefix}
+			, #{serviceType}
+			, #{messageType}
+			, #{paramName}
+			, #{paramValue}
+		)
+
+	</insert>
+	
+	<update id="OPMT200UPT04" parameterType="OPMT200VO">
+		UPDATE TB_CONTENT
+		SET 
+			UPDATE_DATE = GETDATE()
+			, UPDATE_ID = #{regId}
+			<if test='applyYn != null and applyYn != ""'>
+				, APPLY_YN = #{applyYn}
+			</if>
+		WHERE 1=1 
+		<if test='contentSeq != null and contentSeq != "" and contentSeq > 0'>
+			AND CONTENT_SEQ = #{contentSeq} 
+		</if>
+		<if test='systemIdx != null and systemIdx != ""'>
+			AND SystemIdx = #{systemIdx} 
+		</if>
+		<if test='tenantPrefix != null and tenantPrefix != ""'>
+			AND TENANT = #{tenantPrefix} 
+		</if>
+		<if test='category != null and category != ""'>
+			AND CATEGORY = #{category}
+		</if>
+	</update>
+</mapper>

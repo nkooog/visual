@@ -1,0 +1,12 @@
+{
+  "Name": "Authentication",
+  "Method": "Create",
+  "ResultCode": "0000",
+  "Result": {
+    "AccessToken": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4TFI5SEw1d2NTTE5XcjBraldCRSIsImlhdCI6MTcxMjIwNjQ0NSwiZXhwIjoxNzEyMjEwMDQ1fQ.vUJYdF3bNJSOIWnhYw_Gc2pnTG-z_TTxPS_-7mLmIeo",
+    "ExpireDate": "2024-04-04 14:54:05",
+    "ExpireSecond": "3600",
+    "TokenType": "Bearer"
+  },
+  "EndString": "#"
+}

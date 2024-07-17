@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bcs.vl.opst.service.mapper.OPST100Mapper">
+  
+	<!-- 사용 이력 조회 -->
+	<select id="OPST100SEL01" parameterType="OPST100VO" resultType="OPST100VO">
+			SELECT
+				  MH.idx
+				, MH.RequestDate
+				, MH.SystemIdx
+				, (SELECT SystemName FROM SystemInfo SI WHERE SI.SystemIdx = MH.SystemIdx AND SI.IsEnabled = 1) AS systemName
+				, MH.SystemIP
+				, MH.TenantPrefix
+				, (SELECT TenantName FROM TenantInfo TI WHERE TI.SystemIdx = MH.SystemIdx AND TI.TenantPrefix = MH.TenantPrefix AND TI.IsEnabled = 1) AS tenantName
+				, MH.AgentId
+				, MH.ServiceType
+				, ISNULL(STI.ServiceTypeName, MH.ServiceType) AS ServiceTypeName
+				, MH.PhoneNumber
+				, MH.ResultCode
+				, MH.SendCode
+				, MH.ContentsBody
+				, MH.RequestMessage
+				, MH.ResponseMessage
+			FROM  MessageHistory MH
+	   LEFT JOIN ServiceTypeInfo STI ON (STI.ServiceType = MH.ServiceType AND STI.TenantPrefix = MH.TenantPrefix)
+			-- LEFT JOIN ServiceTypeInfo STI ON (STI.SystemIdx = MH.SystemIdx AND STI.TenantPrefix = MH.TenantPrefix AND STI.ServiceType = MH.ServiceType)
+			WHERE 1=1
+			<if test='systemIdx != null and systemIdx !=""'>
+				AND MH.SystemIdx = #{systemIdx}
+			</if>
+			<if test='tenantPrefix != null and tenantPrefix !=""'>
+				AND MH.TenantPrefix = #{tenantPrefix}
+			</if>
+			<if test='serviceType != null and serviceType !=""'>
+				AND MH.ServiceType = #{serviceType}
+			</if>
+			<if test='resultCode != null and resultCode !=""'>
+				AND MH.ResultCode = #{resultCode}
+			</if>
+			<if test='sendCode != null and sendCode !=""'>
+				AND MH.SendCode = #{sendCode}
+			</if>
+			<if test='startDate != null and startDate != ""'>
+				AND MH.RequestDate >= #{startDate}
+			</if>
+			<if test='endDate != null and endDate != ""'>
+				AND MH.RequestDate <![CDATA[<]]> DATEADD(DAY, 1, #{endDate})
+			</if>
+			<if test='keyword != null and keyword !=""'>
+				AND (
+					   MH.AgentId		LIKE CONCAT('%', #{keyword}, '%')
+					OR MH.PhoneNumber	LIKE CONCAT('%', #{keyword}, '%')
+				)
+			</if>
+			 ORDER BY MH.RequestDate DESC
+	</select>
+
+	<select id="OPST100SEL04" resultType="String">
+		/* OPST100_SQL.OPST100SEL04 */
+		SELECT ResultCode
+		  FROM MessageHistory
+		 GROUP BY ResultCode
+	</select>
+				
+</mapper>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+	<bean name="propertiesService" class="egovframework.rte.fdl.property.impl.EgovPropertyServiceImpl" destroy-method="destroy">
+		<property name="properties">
+			<map>
+				<!--//TODO 라이브반영시 삭제 -->
+				<entry key="location" value="opr"/>
+
+				<entry key="Version" value="2023103001"/>
+
+				<entry key="pageUnit" value="10"/>
+				<entry key="pageSize" value="10"/>
+				<entry key="MaxFileSize" value="104857600"/>	<!-- 최대 업로드 가능 사이즈 : 100MB -->
+
+				<!--Linux server path -->
+				<!-- 파일 경로 -->
+<!-- 				<entry key="CMMT"      value="/vl/crmapp/cmmt/"/> -->
+<!-- 				<entry key="CMMT_IMG"  value="/vl/crmapp/cmmt_img/"/> -->
+<!-- 				<entry key="CMMT_CNTS" value="/vl/crmapp/cmmt_cnts/"/> -->
+<!-- 				<entry key="POTO" value="/vl/crmapp/poto/"/> -->
+<!-- 				<entry key="SCHD" value="/vl/crmapp/schd/"/> -->
+<!-- 				<entry key="NOTE" value="/vl/crmapp/note/"/> -->
+<!-- 				<entry key="EXL"  value="/vl/crmapp/exl/"/> -->
+<!-- 				<entry key="EML"  value="/vl/crmapp/eml/"/> -->
+<!-- 				<entry key="PSNZ" value="/vl/crmapp/psnz/"/> -->
+<!-- 				<entry key="SYSM" value="/vl/crmapp/sysm/"/> -->
+<!-- 				<entry key="DASH" value="/vl/crmapp/dash/"/> -->
+<!-- 				<entry key="XLSX" value="/vl/upload/excel/"/> -->
+<!-- 				<entry key="FORM" value="/vl/crmapp/form/"/> -->
+<!-- 				<entry key="DASH_IMG" value="/vl/crmapp/dash_img/"/> -->
+<!-- 				<entry key="MMS_IMG" value="/vl/crmapp/mms_img/"/> -->
+<!-- 				<entry key="VL_CONTENT_IMG" value="/vl/content_img/"/> -->
+<!-- 				<entry key="VL_CONTENT_URL" value="https://bcs.cloudcc.co.kr:33443"/> -->
+
+				<!-- Windows path -->
+				<!-- 파일 경로 -->
+				<entry key="VL_CONTENT_IMG" value="${Globals.fileStore}"/>
+				<entry key="VL_CONTENT_URL" value="${Globals.content.url}"/>
+
+				<!-- 사용자 언어코드 : 한국어 -->
+				<entry key="MlingCd" value="ko"/>
+
+				<!-- 초기 비밀번호 -->
+				<entry key="newPw" value="ia1z4pXXQkElt0keiDmmBw=="/>
+
+				<!-- Elastic  OPR 서버 -->
+				<entry key="elkUrl" value="http://192.168.60.41:9200/"/>
+				<entry key="elkId" value="elastic"/>
+				<entry key="elkPw" value="!Bcsic123"/>
+
+				<!--EMR 연말정산 데이터 가져오기 (FAX) -->
+				<entry key="UrlFaxCalculate" value="http://128.1.70.50:8085/api"/>
+				<!--FAX 보내기 (FAX) -->
+				<entry key="UrlFaxSend" value="http://172.16.190.120:80/form"/>
+
+			</map>
+		</property>
+	</bean>
+
+</beans>	

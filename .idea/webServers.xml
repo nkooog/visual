@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="9ccfa3c0-6f83-4d4f-9c53-eb78666dde40" name="visual_dev">
+        <fileTransfer rootFolder="/usr/local/app/visual" accessType="SFTP" host="192.168.20.165" port="22" sshConfigId="610f2aa8-da10-44cb-9db5-a4f22a385bbc" sshConfig="icadmin@192.168.20.165:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bcs.vl.sysm.service.mapper.SYSM500Mapper">
+
+	<resultMap id="result" type="bcs.vl.sysm.VO.SYSM500VO">
+        <result property="tenantPrefix" column="TenantPrefix"/>
+        <result property="dataFrmId" column="data_frm_id"/>
+        <result property="url" column="url"/>
+        <result property="paramData" column="param_data"/>
+        <result property="resultType" column="result_type"/>
+        <result property="errorMsg" column="error_msg"/>
+        <result property="regDtm" column="reg_dtm"/>
+        <result property="regrId" column="regr_id"/>
+        <result property="authCheck" column="authCheck"/>
+        <result property="originTenantPrefix" column="origin_tenantPrefix"/>
+        <result property="originRegrId" column="origin_regr_id"/>
+    </resultMap>
+
+	<select id="SYSM500SEL01" parameterType="SYSM500VO" resultMap="result">
+        SELECT 
+			TenantPrefix
+			, data_frm_id
+			, url
+			, param_data
+			, result_type
+			, error_msg
+			, reg_dtm
+			, regr_id
+			, authCheck
+			, origin_tenantPrefix
+			, origin_regr_id
+		FROM 
+		(
+			SELECT
+				 TenantPrefix
+				, data_frm_id
+				, url
+				, param_data
+				, result_type
+				, error_msg
+				, CONVERT(CHAR(19), reg_dtm, 120) AS reg_dtm
+				, regr_id
+				, (SELECT C.menu_id FROM VL_GRDBY_MENU_ATHT C LEFT JOIN VL_MENU_MGNT B ON (C.MENU_ID = B.MENU_ID) WHERE C.TenantPrefix = A.TenantPrefix AND B.mapg_vlu1 = value AND C.SystemIdx = '1' AND A.data_frm_id = B.data_frm_id AND usr_grd = (SELECT TB_USER.usr_grd FROM TB_USER WHERE TB_USER.TenantPrefix = A.TenantPrefix AND TB_USER.AgentId = A.regr_id AND SystemIdx = '1' )) AS authCheck
+				, (SELECT B.menu_id FROM VL_MENU_MGNT B WHERE B.mapg_vlu1 = value AND A.data_frm_id = B.data_frm_id) AS authCheck2
+				, origin_tenantPrefix
+				, origin_regr_id
+			FROM 
+			(
+				SELECT
+					 TenantPrefix
+					, data_frm_id
+					, url
+					, param_data
+					, result_type
+					, error_msg
+					, reg_dtm
+					, regr_id
+					, CONCAT('/', value) AS value
+					, origin_tenantPrefix
+					, origin_regr_id
+				FROM VL_USER_LOG
+				CROSS APPLY STRING_SPLIT(URL, '/')
+				WHERE 1=1
+				AND value != ''
+			) AS A
+			WHERE 1=1
+			AND value != ''
+		) AS AA
+		WHERE 1=1
+		AND authCheck2 IS NOT NULL
+		ORDER BY reg_dtm DESC
+    </select>
+
+</mapper>

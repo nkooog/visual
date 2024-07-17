@@ -1,0 +1,358 @@
+﻿/*  
+*  Sprite 이미지 아이콘 정의 , 타입별 버튼 정의 ,  Skin 테마별 색상 정의 
+*/  
+
+//    base 전역 변수  
+$theme-mainColor: #03a9f4; 
+$theme-topColor: #00bfe6;
+$theme-headColor: #0374b5; 
+$theme-sideColor: #2f3338;
+$theme-checkColor: #00a2e6;
+$theme-linkColor: #0085d2;
+$theme-modalColor: #055685;
+$swith-color: #1e2124; 
+
+/*********************************************
+*  이이콘 설정
+*********************************************/ 
+$icoComps: calendar clock zoom down up community pin arrRight arrLeft phone phoneY phoneG phoneS phoneP phoneB talk oneOn sms like bad return check X download upload levelDown emoji mailReply mailForward;
+@each $icoComp in $icoComps  {
+	$icoComPos : index($icoComps, $icoComp); 
+	.icoComp_#{$icoComp}::before { 
+		content: ""; width: 15px; height: 15px; display: inline-block; position: relative; vertical-align: middle;   
+		background-image: url(../../images/contents/ico_component.png);
+		background-repeat: no-repeat; 
+		background-position: #{$icoComPos * -15+15}px 0px;   
+	}
+	button.icoComp_#{$icoComp}:disabled:before { background-position-y: -15px; } 
+}  
+
+
+$icoCnts: home consult myConsult community CS statis schedule setup taskTrans myMenu myCnt ARS callReserv taskReserv chat note allClose mail workTrans callback search down up entry exit trans callHold work rest meal mike kakao naverTalk faceMsg instagram telegram chatBot oneOn email expand contract;
+@each $icoCnt in $icoCnts  {
+	$icoPos : index($icoCnts, $icoCnt); 
+	.icoCnt_#{$icoCnt}::before { 
+		content: ""; width: 20px; height: 20px; display: inline-block; position: relative; vertical-align: middle;   
+		background-image: url(../../images/contents/ico_cnt.png);
+		background-repeat: no-repeat; 
+		background-position: #{$icoPos * -20+20}px 0px;   
+	} 
+}
+
+
+$icoUtils: alarm msn sms kms link favorite helpDesk setup myInfo callAnswer hangUp callMake callHold callMute callTrans callReset callMulti client id pw login CTI;
+@each $icoUtil in $icoUtils  {
+	$icoutilPos : index($icoUtils, $icoUtil); 
+	.icoUtil_#{$icoUtil}::before { 
+		content: ""; width: 25px; height: 25px; display: inline-block; position: relative; vertical-align: middle;   
+		background-image: url(../../images/contents/ico_util.png);
+		background-repeat: no-repeat; 
+		background-position: #{$icoutilPos * -25+25}px 0px;   
+	} 
+} 
+
+
+/*********************************************
+*  날씨 이이콘 
+*********************************************/ 
+@for $wico from 0 through 13 {   	
+	.WICO_#{$wico+1}::before  {   
+		content: ""; width: 100px; height: 100px; display: block; position: absolute; top: 10px; left: calc(50% - 110px);
+		background-image: url(../../images/contents/ico_weather.png);
+		background-repeat: no-repeat; 
+		background-position: #{-$wico * 100}px 0px;  
+	}   
+}
+
+
+/*********************************************
+*  대시보드 팔레트 Tab 
+*********************************************/ 
+@for $palette from 0 through 8 {   	
+	.paletteTab_#{$palette+1}::before  {   
+		content: ""; width: 30px; height: 30px; display: block; margin: 0 auto; opacity: .2; 
+		background-image: url(../../images/contents/ico_layout.png);
+		background-repeat: no-repeat; 
+		background-position: #{-$palette * 30}px 0px;   
+	}   
+}
+
+
+/*********************************************
+*  환경설정 - 테마선택 icon 
+*********************************************/ 
+$setThemes: Default BlueGreen Green Orange Purple;  
+@each $setTheme in $setThemes  {
+	$skinPos : index($setThemes, $setTheme); 
+	.color_#{$setTheme}::before { 
+		content: ""; width: 40px; height: 40px; display: inline-block; position: relative; vertical-align: middle;   
+		background-image: url(../../images/contents/ico_theme.png);
+		background-repeat: no-repeat; 
+		background-position: #{$skinPos * -40+40}px 0px;   
+	} 
+} 
+
+
+/*********************************************
+*  일정캘린더  범주 마크
+*********************************************/  
+$swColors: #2d8eff #8bc34a #ffc107 #c3771c #08a2ac #8acaff #ec7cb1 #a383db;
+.calendarMark { 
+	@each $swColor in $swColors  {
+		$swIndex : index($swColors, $swColor); 
+		.mark_#{$swIndex}   {    
+			&:before {
+				content: ""; width: 8px; height: 8px; background: #000; border-radius: 100%; display: inline-block; margin-right: 5px; background-color: $swColor;
+			}
+		}  
+	}   
+}
+
+
+/*********************************************
+*  상담메인  - 상담원 정보영역 상태값 
+*********************************************/   
+$workCases: ( "ready": #a1887f, "call": #4fc054,  "cnsl": #03a9f4,  "hold": #ffb300,  "work": #2979ff,  "rest": #fa6e79,  "meal": #ba68c8,  "after": #424242, );   
+@each $workState, $workColor in $workCases  { 
+	.workCase_#{$workState}  { 
+		min-width: 100px; height: 30px; display: inline-flex; align-items: center; justify-content: center; position: absolute; top: -7px; left: 50px; z-index: 1; color: #fff; font-size: 13px; font-weight: bold; padding: 0 20px .2em 25px; border: 2px solid #fff; border-radius: 15px 15px 15px 0; background-color: $workColor; 
+		&:before {
+			content: "\e032"; width: 1em; height: 1em; font: 14px/1 WebComponentsIcons; font-weight: normal; opacity: .6; display: inline-block; position: absolute; left: 6px; bottom: 1px;
+		}
+	} 
+} 
+
+
+/*********************************************
+*  Btn 정의 
+*********************************************/ 
+$btnRefers: default primary second third fourth;
+@each $btnRefer in $btnRefers  {
+	.btnRefer_#{$btnRefer}  {  
+		$btColor: #f0efee; 
+		$fColor: #2f3338; 
+		$bdColor: #bbb; 
+		$btColorH: #dcdcdc; 
+
+		@if $btnRefer == "default" {
+			$btColor: #f0efee; 
+			$fColor: #2f3338; 
+			$bdColor: #bbb; 
+			$btColorH: #dcdcdc;  
+		} @else if $btnRefer == "primary" {
+			$btColor: $theme-mainColor; 
+			$fColor: #fff;  
+			$btColorH: #008fe9;  
+			border: none !important; 
+			.k-icon { $fColor: #fff; }  
+		} @else if $btnRefer == "second" {
+			$btColor:#fff;  
+			$fColor: #0374b5; 
+			$bdColor: #008fe9; 
+			$btColorH: #eaeff1;  
+		} @else if $btnRefer == "third" {
+			$btColor:#575757; 
+			$fColor: #fff; 
+			$btColorH: #2a2d30;  
+			border: none !important;
+			.k-icon { $fColor: #fff; }  
+		} @else if $btnRefer == "fourth" {
+			$btColor:#fff; 
+			$fColor: #2f3338; 
+			$bdColor: #bbb; 
+			$btColorH: #eeeff0;  
+		}    
+
+		min-width: 60px; height: 25px; display: inline-block; font-size: 12px; font-weight: bold; letter-spacing: 0; text-align: center; padding: .2em 7px .5em; background-color: $btColor; color: $fColor; border: 1px solid $bdColor; position: relative; flex-shrink: 0; 
+	
+		&:not(:disabled):hover { background-color: $btColorH; }
+		&:disabled { background-color: #c6c6c6; color: #fff; } 
+
+		.k-icon { font-size: 12px; top: 3px; margin-right: 5px; vertical-align: text-top; }    //   icon & text
+		&.icoType  {    //  icon & no text
+			min-width: 25px; padding: 0; font-size: 16px; font-weight: normal;  
+			&:before  { top: -1px;  } 
+		} 
+		&.Small {  //  small size
+			min-width: 20px; height: 20px; line-height: 12px; font-size: 11px; padding: 0 4px; 
+		}
+
+	} 
+}
+
+
+/*********************************************
+*  테마별 색상 정의
+*********************************************/  
+@mixin baseComponent ( $theme-mainColor, $theme-topColor, $theme-headColor, $theme-sideColor, $theme-checkColor, $theme-linkColor, $theme-modalColor, $swith-color, $linkBg-opacity, $util-opacity, $gnb-opacity ) {
+	.system_top { background-color: $theme-topColor; }
+	.head_top { background-color: $theme-headColor; } 
+	.sideL_wrap , .btn_menu_open , .btn_menu_open.on  { background-color: $theme-sideColor; } 
+
+	.indexCategory li a:hover ,
+	.indexCategory li:before ,
+	.imgCatalog figure:hover figcaption ,
+	.k-treeview-leaf.k-selected  ,
+	.kmsBoard .item dd .cont .subject:hover  , 
+	.combineBoard .item .cont .subject a:hover ,
+	.nav .nav_list > li > div.sub_2depth a:hover ,
+	.nav .nav_list > li > div.sub_2depth > ul > li > div.sub_3depth a:hover ,
+	[class*='tableCnt_'] td .link:hover , [class*='tableCnt_'] td .linkEllipsis:hover ,
+	.tableCnt_dash .k-selectable tbody tr:hover td  { color: $theme-linkColor; }
+
+	.nav .nav_list > li > a { opacity: $gnb-opacity; }
+	.nav_list > li > a:hover:before { opacity: $linkBg-opacity; }
+	.topUtil li:before  { opacity: $util-opacity; }
+
+	.k-checkbox:checked ,
+	.k-checkbox:checked:focus ,
+	.k-radio:checked ,
+	.treeRoleCnt_check .k-treeview-lines .k-checkbox-wrapper .k-checkbox:indeterminate   { color: $theme-checkColor; border-color: $theme-checkColor; }
+
+	.popHeader  ,
+	.k-window-titlebar { background: $theme-modalColor; }
+
+	.k-widget.k-tooltip  ,
+	.k-widget.k-popover ,
+	.k-widget.k-tooltip .k-callout  ,
+	.k-popover .k-popover-callout  ,
+	.k-window ,  .k-window-titlebar  { border-color: $theme-modalColor; }
+
+	.indexCategory h4 ,
+	.k-widget.k-tooltip .k-tooltip-button .k-i-close    { color: $theme-modalColor; }
+
+	.k-calendar-container .k-state-selected ,
+	.k-calendar-container .k-state-selected.k-state-hover ,
+	.k-pager-wrap .k-pager-numbers-wrap .k-state-selected  ,
+	.taskTrans .swithCheck input:checked + label:before ,   
+	.taskTrans .swithCheck input:checked:disabled + label:before ,   
+	.nav .nav_list > li > div.sub_2depth > ul > li > a.three:before ,  
+	.nav .nav_list > li > a.on:after ,
+	.iconAssign li:hover  ,
+	.iconAssign li.selected  ,
+	.iconSelected .icon ,
+	.progressDiagram .diagram .value  ,
+	.k-window .k-dialog-buttongroup .k-button-solid-primary  ,
+	.tabVariable > .k-tabstrip-items-wrapper >.k-tabstrip-items > .k-item.k-state-active { background: $theme-mainColor; }
+
+	.taskTrans .swithCheck label  ,
+	.taskTrans .swithCheck input:disabled + label  { background: $swith-color; }
+
+	.navCloseAll  ,
+	.ct_contents.k-tabstrip > .k-tabstrip-items-wrapper ,
+	[class*='conContainer_'] .btExtend.Contract  { background: $theme-sideColor; }
+	
+	[class*='tableCnt_'] .k-selectable .k-state-selected .singleSelect  ,
+	.k-pager-wrap .k-pager-numbers-wrap .k-link:not(.k-state-selected):hover    { color: $theme-mainColor; } 
+
+	.ct_contents >.k-tabstrip-items-wrapper > .k-tabstrip-items > .k-tabstrip-item.k-state-active    { border-color: $theme-sideColor;  }
+
+	[class*='dashPalette_'] .subject input:checked  ,
+	.swithCheck input:checked + label    { background: $theme-mainColor; border-color: $theme-mainColor; } 
+	.swithCheck input:checked + label:before  { border-color: $theme-mainColor; }
+
+	.tabMainCnt > .k-tabstrip-items-wrapper >.k-tabstrip-items > .k-item.k-state-active ,
+	.radioTabType input[type='radio']:checked + label   { border-top-color: $theme-mainColor; }
+
+	.btListen.Active.k-i-volume-up ,   .btListen.k-i-volume-up:hover  { color: $theme-linkColor; }       //    [ 녹취청취 ]  Btn Toggle
+} 
+
+@mixin themeType($theme) {
+	@if $theme == "Default" {
+		$theme-mainColor: #03a9f4;  //  skin
+		$theme-topColor: #00bfe6;
+		$theme-headColor: #0374b5; 
+		$theme-sideColor: #2f3338;
+		$theme-checkColor: #00a2e6;
+		$theme-linkColor: #0085d2;
+		$theme-modalColor: #055685;
+		$swith-color: #1e2124; 
+		
+		@include baseComponent($theme-mainColor, $theme-topColor, $theme-headColor, $theme-sideColor, $theme-checkColor, $theme-linkColor, $theme-modalColor, $swith-color, .3, .7, .5 );
+
+	} @else if $theme == "BlueGreen" {
+		$theme-mainColor: #03a9f4;  //  skin
+		$theme-topColor: #2f3338;
+		$theme-headColor: #26a69a; 
+		$theme-sideColor: #0374b5;
+		$theme-checkColor: #00a2e6;
+		$theme-linkColor: #0085d2;
+		$theme-modalColor: #055685;
+		$swith-color: #1e2124; 
+		
+		@include baseComponent($theme-mainColor, $theme-topColor, $theme-headColor, $theme-sideColor, $theme-checkColor, $theme-linkColor, $theme-modalColor, $swith-color, .1, .4, .6 ); 
+
+	} @else if $theme == "Green" {
+		$theme-mainColor: #54bc59;    //  skin
+		$theme-topColor: #455a64;
+		$theme-headColor: #66bb6a;
+		$theme-sideColor: #009688;
+		$theme-checkColor: $theme-headColor;
+		$theme-linkColor: #009f8e;
+		$theme-modalColor: #006f6e;
+		$swith-color: $theme-topColor; 
+		
+		@include baseComponent($theme-mainColor, $theme-topColor, $theme-headColor, $theme-sideColor, $theme-checkColor, $theme-linkColor, $theme-modalColor, $swith-color,  .1, .4, .6 );
+
+		.btnRefer_primary { 
+			background-color: $theme-mainColor; 
+			&:not(:disabled):hover { background-color: #439b48; }
+		}
+		.btnRefer_second { 
+			background-color: #fff; border-color: #439b48; color: $theme-sideColor; 
+			&:not(:disabled):hover { background-color: #edf1e6; }
+		}
+
+	} @else if $theme == "Orange" {
+		$theme-mainColor: #ff8f00;    //  skin
+		$theme-topColor: #f9a825;
+		$theme-headColor: #424242;
+		$theme-sideColor: #616161;
+		$theme-checkColor: $theme-mainColor;
+		$theme-linkColor: #e26907;
+		$theme-modalColor: #6c5c52;
+		$swith-color: #6c6c6c; 
+
+		@include baseComponent($theme-mainColor, $theme-topColor, $theme-headColor, $theme-sideColor, $theme-checkColor, $theme-linkColor, $theme-modalColor, $swith-color,  .1, .6, .6 );
+		
+		.btnRefer_primary { 
+			background-color: $theme-mainColor; 
+			&:not(:disabled):hover { background-color: #f17700; }
+		}
+		.btnRefer_second { 
+			background-color: #fff; border-color: $theme-mainColor; color: #f57c00; 
+			&:not(:disabled):hover { background-color: #faf2e6; }
+		}
+		.taskTrans .swithCheck label:before ,
+		.taskTrans .swithCheck input:disabled + label:before { background: #000; opacity: .4; }
+
+	} @else if $theme == "Purple" {
+		$theme-mainColor: #7e57c2;    //  skin
+		$theme-topColor: #5a4d85;
+		$theme-headColor: #8073a8;
+		$theme-sideColor: #263238;
+		$theme-checkColor: #ab47bc;
+		$theme-linkColor: #6c2cda;
+		$theme-modalColor: #392160;
+		$swith-color: $theme-sideColor; 
+
+		@include baseComponent($theme-mainColor, $theme-topColor, $theme-headColor, $theme-sideColor, $theme-checkColor, $theme-linkColor, $theme-modalColor, $swith-color,  .3, .4, .5 );
+		
+		.btnRefer_primary { 
+			background-color: $theme-mainColor; 
+			&:not(:disabled):hover { background-color: #5f38a2; }
+		}
+		.btnRefer_second { 
+			background-color: #fff; border-color: #8e24aa; color: #8e24aa; 
+			&:not(:disabled):hover { background-color: #f1edf7; }
+		}
+	}  
+}
+
+$themeSkins: Default BlueGreen Green Orange Purple;
+@each $themeSkin in $themeSkins  {
+	.theme#{$themeSkin} {   
+		@include themeType(#{$themeSkin});  
+	} 
+}  
+

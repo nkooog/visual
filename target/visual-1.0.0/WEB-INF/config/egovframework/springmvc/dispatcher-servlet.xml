@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans classpath:org/springframework/beans/factory/xml/spring-beans-4.0.xsd
+                http://www.springframework.org/schema/context classpath:org/springframework/context/config/spring-context-4.0.xsd
+                http://www.springframework.org/schema/mvc classpath:org/springframework/web/servlet/config/spring-mvc-4.0.xsd
+                http://www.springframework.org/schema/task classpath:org/springframework/scheduling/config/spring-task-4.0.xsd">
+
+    <context:component-scan base-package="bcs.vl,egovframework">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+    </context:component-scan>
+
+    <!-- interceptor 설정 -->
+    <!-- <mvc:annotation-driven />
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="bcs.vl.cmmn.interceptor.Interceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors> -->
+
+	<!-- java scheduler -->
+	<context:component-scan base-package="bcs.vl.util.scheduler.Scheduler" />
+	<task:scheduler id="jobScheduler" pool-size="10" />
+	<task:annotation-driven scheduler="jobScheduler" />
+
+    <!-- 세션을 이용한 Locale start -->
+    <!--
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/> -->
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <property name="defaultLocale" value="ko" />
+    </bean>
+
+    <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+        <property name="paramName" value="lang" />
+    </bean>
+
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="webBindingInitializer">
+            <bean class="bcs.vl.cmmn.web.EgovBindingInitializer"/>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+        <property name="interceptors">
+            <list>
+                <ref bean="localeChangeInterceptor" />
+            </list>
+        </property>
+    </bean>
+
+    <!-- messageSource ::: org.springframework.context.support.ResourceBundleMessageSource-->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <!--<value>egovframework.message.message</value>  --> <!-- <value>egovframework.message.message</value> -->
+                <value>classpath:/egovframework/message/message</value>
+                <value>classpath:/egovframework/message/message_ko</value>
+                <value>classpath:/egovframework/message/message_en</value>
+            </list>
+        </property>
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="cacheSeconds" value="60" />
+    </bean>
+
+    <!-- MessageSource 를 사용하기 위한 Accessor 등록 -->
+    <bean id='messageSourceAccessor' class='org.springframework.context.support.MessageSourceAccessor'>
+        <constructor-arg ref='messageSource'/>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="defaultErrorView" value="cmmn/egovError"/>
+        <property name="exceptionMappings">
+            <props>
+                <prop key="org.springframework.dao.DataAccessException">cmmn/dataAccessFailure</prop>
+                <prop key="org.springframework.transaction.TransactionException">cmmn/transactionFailure</prop>
+                <prop key="egovframework.rte.fdl.cmmn.exception.EgovBizException">cmmn/egovError</prop>
+                <prop key="org.springframework.security.AccessDeniedException">cmmn/egovError</prop>
+                <prop key="org.springframework.web.multipart.MaxUploadSizeExceededException">cmmn/attachFileOverSizeErr</prop>
+                <prop key="org.apache.commons.fileupload.FileUploadBase$SizeLimitExceededException">cmmn/attachFileOverSizeErr</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" p:order="1"
+          p:viewClass="org.springframework.web.servlet.view.JstlView"
+          p:prefix="/" p:suffix=".jsp"/>
+
+    <!-- For Pagination Tag -->
+    <bean id="imageRenderer" class="bcs.vl.cmmn.web.EgovImgPaginationRenderer"/>
+
+    <bean id="paginationManager" class="egovframework.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationManager">
+        <property name="rendererType">
+            <map>
+                <entry key="image" value-ref="imageRenderer"/>
+            </map>
+        </property>
+    </bean>
+    <!-- /For Pagination Tag -->
+
+    <bean id="beanNameResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0"/>
+    <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+        <property name="contentType" value="application/json;charset=UTF-8"></property>
+    </bean>
+
+    <!--  commons-fileupload multipartResolver -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="104857600"/>	<!-- 100MB -->
+        <property name="maxInMemorySize" value="10485760"/> <!-- 10MB -->
+    </bean>
+
+
+    <bean id="fileViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+        <property name="order" value="0"></property>
+    </bean>
+    <bean id="downloadView" class="bcs.vl.util.file.DownloadView"/>
+
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+
+
+
+    <!-- 외부 이미지 폴더 접근 linux Server-->
+<!--
+    <mvc:resources mapping="/photo/**" location="file:///vl/crmapp/poto/" />
+    <mvc:resources mapping="/dashphoto/**" location="file:///vl/crmapp/dash/" />
+    <mvc:resources mapping="/rsvphotodeas/**" location="file:///vl/crmapp/bizs/deas/" />
+    <mvc:resources mapping="/rsvphotodocter/**" location="file:///vl/crmapp/bizs/docter/" />
+    <mvc:resources mapping="/form/**" location="file:///vl/crmapp/form/" />
+    <mvc:resources mapping="/dashimg/**" location="file:///vl/crmapp/dash_img/" />
+    <mvc:resources mapping="/mmsimg/**" location="file:///vl/crmapp/mms_img/" />
+    -->
+<!--     <mvc:resources mapping="/vlContentImg/**" location="file:///vl\content_img\" /> -->
+
+
+    <!-- 외부 이미지 폴더 접근 windows PC -->
+    <mvc:resources mapping="/vlContentImg/**" location="file:///C:\vl\content_img\" />
+    <!--
+    <mvc:resources mapping="/vlContentImg/**" location="/file/content_img/" />
+    -->
+    <!--
+        <mvc:resources mapping="/photo/**" location="file:///C:/vl/crmapp/poto/" />
+        <mvc:resources mapping="/dashphoto/**" location="file:///C:/vl/crmapp/dash/" />
+        <mvc:resources mapping="/rsvphotodeas/**" location="file:///C:/vl/crmapp/bizs/deas/" />
+        <mvc:resources mapping="/rsvphotodocter/**" location="file:///C:/vl/crmapp/bizs/docter/" />
+        <mvc:resources mapping="/form/**" location="file:///C:/vl/crmapp/form/" />
+        <mvc:resources mapping="/dashimg/**" location="file:///C:/vl/crmapp/dash_img/" />
+        <mvc:resources mapping="/mmsimg/**" location="file:///C:/vl/crmapp/mms_img/" />
+    -->
+
+
+    <mvc:view-controller path="/cmmn/validator.do" view-name="cmmn/validator"/>
+
+    <bean class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <!-- 환경별 설정(spring.profiles.active 값은 VM 옵션으로 설정되어 있음) -->
+                <value>classpath:/egovframework/egovProps/globals_${spring.profiles.active}.properties</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>

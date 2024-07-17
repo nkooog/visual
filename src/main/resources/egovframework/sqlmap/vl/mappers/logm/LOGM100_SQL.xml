@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bcs.vl.logm.service.mapper.LOGM100Mapper">
+  
+	<!-- 사용자 로그 조회 -->
+	<select id="LOGM100SEL01" parameterType="LOGM100VO" resultType="LOGM100VO">
+			/* LOGM100_SQL.LOGM100SEL01 */
+			SELECT
+				  AH.ACTION
+				, AH.CONTENT_SEQ	AS contentSeq
+				, AH.USER_ID		AS userId
+				, CONVERT (VARCHAR(20), AH.REGDATE, 120)		AS regDate
+				, AH.IP 
+				, AH.TENANT
+				, TI.TenantName
+				, SI.SystemIdx
+				, SI.SystemName
+				, TC.TITLE
+			FROM  ACTIONHISTORY AH
+			LEFT OUTER JOIN TenantInfo TI ON (TI.TenantPrefix = AH.TENANT AND TI.SystemIdx = AH.SystemIdx AND TI.IsEnabled = 1)
+			LEFT OUTER JOIN SystemInfo SI ON (SI.SystemIdx = TI.SystemIdx AND SI.SystemIdx = AH.SystemIdx AND SI.IsEnabled = 1)
+			LEFT OUTER JOIN TB_CONTENT TC ON (TC.CONTENT_SEQ = AH.CONTENT_SEQ AND TC.TENANT = AH.TENANT)
+			WHERE 1=1
+			<if test='systemIdx != null and systemIdx !=""'>
+				AND SI.SystemIdx = #{systemIdx}
+			</if>
+			<if test='tenant != null and tenant !=""'>
+				AND AH.TENANT = #{tenant}
+			</if>
+			<if test='action != null and action !=""'>
+				AND AH.ACTION = #{action}
+			</if>
+			<if test='startDate != null and startDate != ""'>
+				AND AH.REGDATE >= #{startDate}
+			</if>
+			<if test='endDate != null and endDate != ""'>
+				AND AH.REGDATE &lt; DATEADD(DAY, 1, #{endDate})
+			</if>
+			<if test='keyword != null and keyword !=""'>
+				AND TC.TITLE LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			 ORDER BY AH.REGDATE DESC
+	</select>
+				
+</mapper>

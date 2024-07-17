@@ -1,0 +1,848 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="visual:war exploded" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="82d1359e-0c43-4216-8553-c6163c9df16b" name="Changes" comment="사용이력 버그 수정 및 검색조건 기능 추가" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTTP Request" />
+        <option value="Class" />
+        <option value="JavaScript File" />
+        <option value="FxmlFile" />
+      </list>
+    </option>
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2eZrwxOE4O4qAP3MfkMSnTAbPrE" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="2" id="Remove" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "HTTP Request.test | #1.executor": "Run",
+    "HTTP Request.test | #2.executor": "Run",
+    "JUnit.egovTest.split.executor": "Run",
+    "JUnit.egovTest.test.executor": "Run",
+    "JUnit.egovTest.test1.executor": "Run",
+    "JUnit.egovTest.test2.executor": "Run",
+    "JUnit.egovTest.테스트.executor": "Run",
+    "Maven.visual [install].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Tomcat Server.Tomcat 9.0.52.executor": "Run",
+    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
+    "WebServerToolWindowPanel.toolwindow.show.date": "false",
+    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
+    "WebServerToolWindowPanel.toolwindow.show.size": "false",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "1.8",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/bcs_workspace",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.45181188",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.General",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\bcs_workspace" />
+      <recent name="C:\bcs_workspace\visual\src\main\webapp\resources\images\contents" />
+      <recent name="C:\bcs_workspace\visual\src\main\webapp\resources\js\biz\opst" />
+      <recent name="C:\bcs_workspace\visual\src\main\resources\egovframework\egovProps" />
+    </key>
+    <key name="CreateBuilderDialog.RecentsKey">
+      <recent name="bcs.vl.cmmn.VO" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.52">
+    <configuration name="egovTest.테스트" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="visual" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="egovTest" />
+      <option name="METHOD_NAME" value="테스트" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="egovTest.split" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="visual" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="egovTest" />
+      <option name="METHOD_NAME" value="split" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="egovTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="visual" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="egovTest" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="egovTest.test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="visual" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="egovTest" />
+      <option name="METHOD_NAME" value="test1" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="egovTest.test2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="visual" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="egovTest" />
+      <option name="METHOD_NAME" value="test2" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tomcat 9.0.52" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.52" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="1.8" nameIsGenerated="true">
+      <option name="OPEN_IN_BROWSER" value="false" />
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:9090" />
+      <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
+      <option name="COMMON_VM_ARGUMENTS" value="-Dfile.encoding=UTF-8 -Dspring.profiles.active=dev -Djava.net.preferIPv4Stack=true" />
+      <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
+      <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
+      <deployment>
+        <artifact name="visual:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/visual" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="7094dfc6-d462-46a7-8258-902f6c945003" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="60629" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="visual:war" />
+          <artifact name="visual:war exploded" />
+        </option>
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="JUnit.egovTest.테스트" />
+      <item itemvalue="JUnit.egovTest.split" />
+      <item itemvalue="JUnit.egovTest.test1" />
+      <item itemvalue="JUnit.egovTest.test" />
+      <item itemvalue="JUnit.egovTest.test2" />
+      <item itemvalue="Tomcat Server.Tomcat 9.0.52" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.egovTest.테스트" />
+        <item itemvalue="JUnit.egovTest.split" />
+        <item itemvalue="JUnit.egovTest.test" />
+        <item itemvalue="JUnit.egovTest.test1" />
+        <item itemvalue="JUnit.egovTest.test2" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-1.8.0_402-corretto-1.8.0_402-f644763e9732-af3fa2b8" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration" cleanupOnStartRun="true" SSL_PROTOCOLS="tlsv1">
+    <configuration>C:\Users\BCSA0050\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+    <option name="FORCE_UPDATE" value="true" />
+  </component>
+  <component name="SvnFileUrlMappingImpl">
+    <option name="myMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\bcs_workspace\visual" />
+          <option name="myCopyRoot" value="C:\bcs_workspace\visual" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+    <option name="myMoreRealMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\bcs_workspace\visual" />
+          <option name="myCopyRoot" value="C:\bcs_workspace\visual" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="82d1359e-0c43-4216-8553-c6163c9df16b" name="Changes" comment="" />
+      <created>1702882428045</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1702882428045</updated>
+      <workItem from="1702882428047" duration="28000" />
+      <workItem from="1706680262860" duration="6000" />
+      <workItem from="1706684666029" duration="172000" />
+      <workItem from="1712123185415" duration="5169000" />
+      <workItem from="1712187358417" duration="16943000" />
+      <workItem from="1712275035008" duration="95000" />
+      <workItem from="1712289505986" duration="24000" />
+      <workItem from="1712289575228" duration="9143000" />
+      <workItem from="1712533534466" duration="24175000" />
+      <workItem from="1712619289200" duration="18863000" />
+      <workItem from="1712793433515" duration="121000" />
+      <workItem from="1712793956241" duration="799000" />
+      <workItem from="1712795369719" duration="465000" />
+      <workItem from="1712810945974" duration="137000" />
+      <workItem from="1712811149280" duration="11000" />
+      <workItem from="1712897498762" duration="9251000" />
+      <workItem from="1712909443556" duration="1534000" />
+      <workItem from="1713138269999" duration="24563000" />
+      <workItem from="1713224601299" duration="3010000" />
+      <workItem from="1713228729420" duration="20327000" />
+      <workItem from="1713311450065" duration="6749000" />
+      <workItem from="1713326787442" duration="5318000" />
+      <workItem from="1713400589367" duration="4046000" />
+      <workItem from="1713491421900" duration="14600000" />
+      <workItem from="1713743676186" duration="2751000" />
+      <workItem from="1713833523813" duration="11408000" />
+      <workItem from="1713853405950" duration="3832000" />
+      <workItem from="1713916587320" duration="21466000" />
+      <workItem from="1714002487616" duration="21611000" />
+      <workItem from="1714088252862" duration="16150000" />
+      <workItem from="1714348013716" duration="24067000" />
+      <workItem from="1714434546422" duration="3801000" />
+      <workItem from="1714440818502" duration="978000" />
+      <workItem from="1714442216496" duration="649000" />
+      <workItem from="1714610791610" duration="7832000" />
+      <workItem from="1714625474968" duration="1595000" />
+      <workItem from="1714708320882" duration="33000" />
+      <workItem from="1714717834176" duration="396000" />
+      <workItem from="1715041632099" duration="220000" />
+      <workItem from="1715045885314" duration="2608000" />
+      <workItem from="1715060014206" duration="4807000" />
+      <workItem from="1715218681957" duration="651000" />
+      <workItem from="1715562429824" duration="593000" />
+      <workItem from="1715581922728" duration="1662000" />
+      <workItem from="1715908002508" duration="1858000" />
+      <workItem from="1715920926264" duration="1350000" />
+      <workItem from="1716169399993" duration="3010000" />
+      <workItem from="1716266959671" duration="665000" />
+      <workItem from="1716349729769" duration="8578000" />
+      <workItem from="1716444817899" duration="235000" />
+      <workItem from="1716875061121" duration="2229000" />
+      <workItem from="1716963925055" duration="2408000" />
+      <workItem from="1717055783560" duration="10512000" />
+      <workItem from="1718236911880" duration="4167000" />
+      <workItem from="1718256352994" duration="5435000" />
+      <workItem from="1718326766562" duration="7730000" />
+      <workItem from="1718581300943" duration="16542000" />
+      <workItem from="1718667468703" duration="13547000" />
+      <workItem from="1718753964448" duration="5006000" />
+      <workItem from="1718840542103" duration="7932000" />
+      <workItem from="1718946514751" duration="4337000" />
+      <workItem from="1719186143020" duration="24000" />
+      <workItem from="1719281643542" duration="64000" />
+      <workItem from="1719295087787" duration="18000" />
+      <workItem from="1719296208437" duration="7000" />
+      <workItem from="1719361815364" duration="318000" />
+      <workItem from="1719381692833" duration="2418000" />
+      <workItem from="1719453007745" duration="745000" />
+      <workItem from="1719561435578" duration="180000" />
+      <workItem from="1719813382953" duration="624000" />
+      <workItem from="1719814538844" duration="17032000" />
+      <workItem from="1719981304119" duration="707000" />
+      <workItem from="1719992040341" duration="4583000" />
+      <workItem from="1720073750268" duration="616000" />
+      <workItem from="1720138293394" duration="4561000" />
+      <workItem from="1720145116835" duration="852000" />
+      <workItem from="1720155429479" duration="616000" />
+      <workItem from="1720395992415" duration="606000" />
+      <workItem from="1720506916504" duration="1146000" />
+      <workItem from="1720508286091" duration="1689000" />
+      <workItem from="1720511029326" duration="954000" />
+      <workItem from="1720570753356" duration="1071000" />
+      <workItem from="1720657128905" duration="160000" />
+      <workItem from="1720663121057" duration="6568000" />
+      <workItem from="1720758178015" duration="1559000" />
+      <workItem from="1720761176904" duration="6364000" />
+      <workItem from="1721016285661" duration="376000" />
+      <workItem from="1721026057188" duration="1358000" />
+      <workItem from="1721027674310" duration="21000" />
+      <workItem from="1721091439127" duration="9637000" />
+      <workItem from="1721192132146" duration="1006000" />
+      <workItem from="1721194646098" duration="298000" />
+      <workItem from="1721194953181" duration="937000" />
+    </task>
+    <task id="LOCAL-00003" summary=".">
+      <option name="closed" value="true" />
+      <created>1712187951623</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1712187951623</updated>
+    </task>
+    <task id="LOCAL-00004" summary="resttemplate utf-8">
+      <option name="closed" value="true" />
+      <created>1712301035989</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1712301035989</updated>
+    </task>
+    <task id="LOCAL-00005" summary="RestTemplate Custom">
+      <option name="closed" value="true" />
+      <created>1712628358325</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1712628358325</updated>
+    </task>
+    <task id="LOCAL-00006" summary=".">
+      <option name="closed" value="true" />
+      <created>1712628415175</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1712628415175</updated>
+    </task>
+    <task id="LOCAL-00007" summary="ajax errorCode return">
+      <option name="closed" value="true" />
+      <created>1712628443394</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1712628443394</updated>
+    </task>
+    <task id="LOCAL-00008" summary="로컬,개발,운영 파일구분">
+      <option name="closed" value="true" />
+      <created>1712628488091</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1712628488092</updated>
+    </task>
+    <task id="LOCAL-00009" summary="콜통계, 콜이력및청취 개선사항 반영">
+      <option name="closed" value="true" />
+      <created>1712628509957</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1712628509957</updated>
+    </task>
+    <task id="LOCAL-00010" summary="콜통계,이력청취 개선사항 반영">
+      <option name="closed" value="true" />
+      <created>1712628530340</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1712628530340</updated>
+    </task>
+    <task id="LOCAL-00011" summary="콜이력,통계 개선사항 반영">
+      <option name="closed" value="true" />
+      <created>1712628553984</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1712628553984</updated>
+    </task>
+    <task id="LOCAL-00012" summary=".">
+      <option name="closed" value="true" />
+      <created>1712649431785</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1712649431785</updated>
+    </task>
+    <task id="LOCAL-00013" summary="로컬,개발,운영 설정정보 파일 생성">
+      <option name="closed" value="true" />
+      <created>1712795782531</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1712795782532</updated>
+    </task>
+    <task id="LOCAL-00014" summary="DB커넥션 정보 수정">
+      <option name="closed" value="true" />
+      <created>1712795811850</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1712795811850</updated>
+    </task>
+    <task id="LOCAL-00015" summary=".">
+      <option name="closed" value="true" />
+      <created>1713227588298</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1713227588298</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Join 조건변경">
+      <option name="closed" value="true" />
+      <created>1713239138906</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1713239138906</updated>
+    </task>
+    <task id="LOCAL-00017" summary=".">
+      <option name="closed" value="true" />
+      <created>1713848706108</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1713848706108</updated>
+    </task>
+    <task id="LOCAL-00018" summary=".">
+      <option name="closed" value="true" />
+      <created>1713852069819</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1713852069819</updated>
+    </task>
+    <task id="LOCAL-00019" summary=".쿼리수정(검색조건 추가 [SystemIdx])">
+      <option name="closed" value="true" />
+      <created>1713858198557</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1713858198557</updated>
+    </task>
+    <task id="LOCAL-00020" summary="사용이력 버그 수정 및 검색조건 기능 추가">
+      <option name="closed" value="true" />
+      <created>1713939208952</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1713939208952</updated>
+    </task>
+    <task id="LOCAL-00021" summary="사용자로그 검색 조건 그리드 및 AJAX 호출 수정">
+      <option name="closed" value="true" />
+      <created>1713942581868</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1713942581868</updated>
+    </task>
+    <task id="LOCAL-00022" summary=".">
+      <option name="closed" value="true" />
+      <created>1714020200328</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1714020200328</updated>
+    </task>
+    <task id="LOCAL-00023" summary=".">
+      <option name="closed" value="true" />
+      <created>1714025538183</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1714025538183</updated>
+    </task>
+    <task id="LOCAL-00024" summary=".">
+      <option name="closed" value="true" />
+      <created>1714028411856</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1714028411856</updated>
+    </task>
+    <task id="LOCAL-00025" summary=".색추가">
+      <option name="closed" value="true" />
+      <created>1714092949909</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1714092949909</updated>
+    </task>
+    <task id="LOCAL-00026" summary=".">
+      <option name="closed" value="true" />
+      <created>1714118185970</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1714118185970</updated>
+    </task>
+    <task id="LOCAL-00027" summary="메모수정기능 추가">
+      <option name="closed" value="true" />
+      <created>1714361630811</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1714361630811</updated>
+    </task>
+    <task id="LOCAL-00028" summary="월단위 검색 변경">
+      <option name="closed" value="true" />
+      <created>1714365168654</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1714365168654</updated>
+    </task>
+    <task id="LOCAL-00029" summary=".">
+      <option name="closed" value="true" />
+      <created>1714370070441</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1714370070441</updated>
+    </task>
+    <task id="LOCAL-00030" summary=".">
+      <option name="closed" value="true" />
+      <created>1714377192233</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1714377192233</updated>
+    </task>
+    <task id="LOCAL-00031" summary=".">
+      <option name="closed" value="true" />
+      <created>1714434678917</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1714434678917</updated>
+    </task>
+    <task id="LOCAL-00032" summary=".">
+      <option name="closed" value="true" />
+      <created>1714439210675</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1714439210675</updated>
+    </task>
+    <task id="LOCAL-00033" summary=".">
+      <option name="closed" value="true" />
+      <created>1714611177989</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1714611177989</updated>
+    </task>
+    <task id="LOCAL-00034" summary="EndTime 일자 변경 12:59:59 -&gt; 23:59:59">
+      <option name="closed" value="true" />
+      <created>1715062845881</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1715062845881</updated>
+    </task>
+    <task id="LOCAL-00035" summary="비주얼레터링이력 텍스트 삭제">
+      <option name="closed" value="true" />
+      <created>1715562461497</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1715562461497</updated>
+    </task>
+    <task id="LOCAL-00036" summary="로고변경">
+      <option name="closed" value="true" />
+      <created>1717113966898</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1717113966898</updated>
+    </task>
+    <task id="LOCAL-00037" summary="로그인 systemIdx 구분 추가">
+      <option name="closed" value="true" />
+      <created>1717122108219</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1717122108219</updated>
+    </task>
+    <task id="LOCAL-00038" summary="사용이력 버그 수정 및 검색조건 기능 추가">
+      <option name="closed" value="true" />
+      <created>1717122378717</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1717122378717</updated>
+    </task>
+    <task id="LOCAL-00039" summary="매핑된 url에 SystemIdx로 로그인되도록 변경">
+      <option name="closed" value="true" />
+      <created>1718695049088</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1718695049088</updated>
+    </task>
+    <task id="LOCAL-00040" summary=".">
+      <option name="closed" value="true" />
+      <created>1718695066456</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1718695066456</updated>
+    </task>
+    <task id="LOCAL-00041" summary=".">
+      <option name="closed" value="true" />
+      <created>1718695479549</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1718695479549</updated>
+    </task>
+    <task id="LOCAL-00042" summary=".">
+      <option name="closed" value="true" />
+      <created>1718842691820</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1718842691820</updated>
+    </task>
+    <task id="LOCAL-00043" summary=" .">
+      <option name="closed" value="true" />
+      <created>1719445538198</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1719445538198</updated>
+    </task>
+    <task id="LOCAL-00044" summary="검색조건추가">
+      <option name="closed" value="true" />
+      <created>1720054724593</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1720054724593</updated>
+    </task>
+    <task id="LOCAL-00045" summary="컬럼 사이즈조절">
+      <option name="closed" value="true" />
+      <created>1720054809917</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1720054809917</updated>
+    </task>
+    <task id="LOCAL-00046" summary="서비스번호 텍스트 css 추가">
+      <option name="closed" value="true" />
+      <created>1720139163450</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1720139163450</updated>
+    </task>
+    <task id="LOCAL-00047" summary="달력 한글로 표기되도록 수정">
+      <option name="closed" value="true" />
+      <created>1720142824613</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1720142824613</updated>
+    </task>
+    <task id="LOCAL-00048" summary="mlingCd 추가">
+      <option name="closed" value="true" />
+      <created>1720142855863</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1720142855863</updated>
+    </task>
+    <task id="LOCAL-00049" summary="사용여부 기본 true-&gt;false로 변경&#10;서비스번호 컬럼 class x">
+      <option name="closed" value="true" />
+      <created>1720145372197</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1720145372197</updated>
+    </task>
+    <task id="LOCAL-00050" summary=" .">
+      <option name="closed" value="true" />
+      <created>1720764661330</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1720764661330</updated>
+    </task>
+    <task id="LOCAL-00051" summary=" .">
+      <option name="closed" value="true" />
+      <created>1720765666585</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1720765666585</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="콜통계,이력청취 개선사항 반영" />
+    <MESSAGE value="콜이력,통계 개선사항 반영" />
+    <MESSAGE value="로컬,개발,운영 설정정보 파일 생성" />
+    <MESSAGE value="DB커넥션 정보 수정" />
+    <MESSAGE value="Join 조건변경" />
+    <MESSAGE value=".쿼리수정(검색조건 추가 [SystemIdx])" />
+    <MESSAGE value=".쿼리수정" />
+    <MESSAGE value="사용자로그 검색 조건 그리드 및 AJAX 호출 수정" />
+    <MESSAGE value=".색추가" />
+    <MESSAGE value="메모수정기능 추가" />
+    <MESSAGE value="월단위 검색 변경" />
+    <MESSAGE value="EndTime 일자 변경 12:59:59 -&gt; 23:59:59" />
+    <MESSAGE value="비주얼레터링이력 텍스트 삭제" />
+    <MESSAGE value="로고변경" />
+    <MESSAGE value="로그인 systemIdx 구분 추가" />
+    <MESSAGE value="매핑된 url에 SystemIdx로 로그인되도록 변경" />
+    <MESSAGE value="." />
+    <MESSAGE value="검색조건추가" />
+    <MESSAGE value="컬럼 사이즈조절" />
+    <MESSAGE value="서비스번호 텍스트 css 추가" />
+    <MESSAGE value="달력 한글로 표기되도록 수정" />
+    <MESSAGE value="mlingCd 추가" />
+    <MESSAGE value="사용여부 기본 true-&gt;false로 변경&#10;서비스번호 컬럼 class x" />
+    <MESSAGE value="사용이력 버그 수정 및 검색조건 기능 추가" />
+    <MESSAGE value=" ." />
+    <option name="LAST_COMMIT_MESSAGE" value=" ." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/bcs/vl/dash/VO/SampleVO.java</url>
+          <line>15</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/bcs/vl/sysm/web/SYSM100Controller.java</url>
+          <line>89</line>
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/bcs/vl/opmt/web/OPMT200Controller.java</url>
+          <line>469</line>
+          <option name="timeStamp" value="89" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/main/webapp/resources/js/biz/logm/LOGM100T.js</url>
+          <line>262</line>
+          <option name="timeStamp" value="90" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="org.apache.catalina.connector.ResponseFacade" memberName="response" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+</project>

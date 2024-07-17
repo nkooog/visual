@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bcs.vl.lgin.service.mapper.LGIN000Mapper">
+  
+	<!-- 사용자 존재 여부 -->
+	<select id="LGIN000SEL01" parameterType="LGIN000VO" resultType="int">
+			SELECT
+				  count(*) AS checkCnt
+			FROM  TB_USER
+			WHERE 1=1
+			AND   TenantPrefix            = #{tenantPrefix}
+			AND   AgentId                 = #{agentId}
+			<if test="tenantPrefix != null and tenantPrefix != 'SYS'">
+				AND SystemIdx			  = #{systemIdx}
+			</if>
+	</select>
+
+	<!-- 사용자 정보 조회(session에 담는 정보) -->
+	<select id="LGIN000SEL02" parameterType="LGIN000VO" resultType="LGIN000VO">
+			SELECT
+				  TI.TenantPrefix		AS tenantPrefix
+				, TU.AgentId			AS agentId
+				, TU.Name
+				, TU.Password
+				, TU.usr_grd			AS usrGrd
+				, TU.usr_lvl			AS usrLvl
+				, SI.SystemIdx			AS systemIdx
+				, (SELECT CODE_NAME FROM TB_CODE WHERE CATEGORY = 'USERAUTHORITY' AND CODE = TU.usr_grd) AS usrGrdNm
+				, (SELECT tenant_group_id FROM VL_TENANT_GROUP_ATHT WHERE TenantPrefix = TU.TenantPrefix) AS tenantGroupId
+			FROM  TB_USER TU
+			LEFT JOIN  TenantInfo TI ON (TI.TenantPrefix = TU.TenantPrefix AND TI.IsEnabled = 1)
+			LEFT JOIN  SystemInfo SI ON (SI.SystemIdx = TI.SystemIdx AND SI.IsEnabled = 1)
+			WHERE  1=1
+			AND    TU.TenantPrefix	= #{tenantPrefix}
+			AND    TU.usr_grd		= #{usrGrd}
+			AND	   TU.UseYN			= 1
+			ORDER BY AgentId
+          	OFFSET 0 ROWS
+           	FETCH NEXT 1 ROW ONLY
+	</select>
+
+	<!-- 사용자 정보 조회(login 검증용) -->
+	<select id="LGIN000SEL07" parameterType="LGIN000VO" resultType="LGIN000VO">
+		/*
+			LGIN000SEL07
+		*/
+		SELECT
+			TU.SystemIdx
+			, TU.TenantPrefix
+			, TU.AgentId			AS agentId
+			, TU.Name
+			, TU.Password
+			, TU.usr_grd			AS usrGrd
+			, TU.usr_lvl			AS usrLvl
+			, TU.SystemIdx			AS systemIdx
+			, (SELECT CODE_NAME FROM TB_CODE WHERE CATEGORY = 'USERAUTHORITY' AND CODE = TU.usr_grd) AS usrGrdNm
+			, (SELECT tenant_group_id FROM VL_TENANT_GROUP_ATHT WHERE TenantPrefix = TU.TenantPrefix) AS tenantGroupId
+		FROM
+			TB_USER TU
+			, TenantInfo TI
+			, SystemInfo SI
+		WHERE TU.TenantPrefix = TI.TenantPrefix
+		AND TU.SystemIdx = TI.SystemIdx
+		AND TI.SystemIdx = SI.SystemIdx
+		AND TI.IsEnabled = 1
+		AND SI.IsEnabled = 1
+		AND TU.UseYN	 = 1
+		AND TU.TenantPrefix     = #{tenantPrefix}
+		AND TU.AgentId          = #{agentId}
+		<if test="tenantPrefix != null and tenantPrefix != 'SYS'">
+			AND TU.SystemIdx			  = #{systemIdx}
+		</if>
+	</select>
+		
+	<select id="LGIN000SEL04" parameterType="LGIN000VO" resultType="int">
+			SELECT
+				  count(*)
+			FROM  TenantInfo
+			WHERE 1=1
+			AND   tenant_id = #{tenantPrefix}
+	</select>
+	
+	<select id="LGIN000SEL06" parameterType="LGIN000VO" resultType="LGIN000VO">
+			SELECT TO_CHAR(current_date,'YYYYMMDD') AS currentDate
+	</select>
+
+	<!-- 비밀번호 변경 -->
+	<update id="LGIN000UPT05" parameterType="LGIN000VO">
+			UPDATE TB_USER
+			SET    Password		        =  #{password}     
+				,  ModDate      	    =  GETDATE()
+				,  ModUsr           	=  #{agentId}
+			WHERE 1=1
+			AND   TenantPrefix          = #{tenantPrefix}
+			AND   AgentId               = #{agentId}
+			<if test='systemIdx != null and systemIdx !=""'>
+				AND SystemIdx			  = #{systemIdx}
+			</if>
+	</update>	
+
+	<select id="LGIN000SEL08" resultType="Integer" parameterType="String">
+		/* LGIN000_SQL.LGIN000SEL08 */
+		SELECT SystemIdx
+		  FROM VL_DMN_SYSIDX_MAPG
+		 <where>
+			 URL = #{url}
+		 </where>
+	</select>
+				
+</mapper>

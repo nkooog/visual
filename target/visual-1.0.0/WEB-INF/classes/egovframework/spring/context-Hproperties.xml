@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+    <!--병원용 테넌트 공통 프로퍼티    -->
+    <bean name="HpropertiesService" class="egovframework.rte.fdl.property.impl.EgovPropertyServiceImpl" destroy-method="destroy">
+        <property name="properties">
+            <map>
+                <!-- 리눅스용-->
+                <entry key="DEAS_IMG" value="/aicrm/crmapp/bizs/deas/"/>
+                <entry key="DOCTER_IMG" value="/aicrm/crmapp/bizs/docter/"/>
+
+                <!-- 윈도우용-->
+                <!--
+                <entry key="DEAS_IMG" value="C:/aicrm/crmapp/bizs/deas/"/>
+                <entry key="DOCTER_IMG" value="C:/aicrm/crmapp/bizs/docter/"/>
+                -->
+            </map>
+        </property>
+    </bean>
+    
+    <!-- EXONA Lite 프로퍼티 -->
+    <bean name="EXONApropertiesService" class="egovframework.rte.fdl.property.impl.EgovPropertyServiceImpl" destroy-method="destroy">
+        <property name="properties">
+            <map>
+                <entry key="Url" value="https://tst.exona.kr:18080/v1"/>
+            </map>
+        </property>
+    </bean>
+
+</beans>
+
